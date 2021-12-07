@@ -1,0 +1,3 @@
+- @pets.each do |pet|
+    = link_to pet["name"], vet_pet_appointment_path(:id => pet['id'])
+    br

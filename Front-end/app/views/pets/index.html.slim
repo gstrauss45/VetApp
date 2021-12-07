@@ -1,0 +1,21 @@
+|pets list
+br
+- @pets.each do |pet|
+    = link_to pet["name"], pet_show_path(:pet_id => pet["id"])
+    = form_with url: "http://localhost:3000/register", method: :post do |form|
+        = form.hidden_field(:pet_id, :value => pet["id"])
+        = form.select :vet_id, @array
+        = form.submit :register
+    - if pet["vet_id"]
+        - @vets.each do |vet|
+            - if vet["id"] == pet["vet_id"]
+                = vet["name"]
+        br
+        | create appointment
+        = form_with url: "http://localhost:3000/appointment_create", method: :post do |form|
+            = form.hidden_field(:pet_id, :value => pet["id"])
+            = form.hidden_field(:vet_id, :value => pet["vet_id"])
+            = form.date_field :date
+            br
+            = form.submit
+    br

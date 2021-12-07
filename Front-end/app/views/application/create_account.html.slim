@@ -1,0 +1,25 @@
+| create account
+= form_with url: "http://localhost:3000/create_account", method: :post do |form|
+    = form.label :name
+    = form.text_field :name
+    br
+    = form.label :email
+    = form.text_field :email
+    br
+    = form.label :password
+    = form.text_field :password
+    br
+    = form.select(:role, [['vet', 'vet'], ['owner', 'owner']])
+    br
+    = form.submit
+br
+br
+| login
+= form_with url: "http://localhost:3000/login", method: :post do |form|
+    = form.label :email
+    = form.text_field :email
+    br
+    = form.label :password
+    = form.text_field :password
+    br
+    = form.submit

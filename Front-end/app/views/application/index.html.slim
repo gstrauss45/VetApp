@@ -1,0 +1,12 @@
+- if @role == 'owner'
+    = form_with url: "http://localhost:3000/pet_add", method: :post do |form|
+        = form.label :name
+        = form.text_field :name
+        br
+        = form.submit
+    br
+    = link_to "my pets", pets_list_path
+- elsif @role == 'vet'
+    = link_to "vets pets", vet_pets_path
+    br
+    = link_to "vet appointments", vet_appointments_path

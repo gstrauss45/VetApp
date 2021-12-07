@@ -1,0 +1,9 @@
+= @pet["name"]
+br
+= @vet["name"]
+br
+|appointments
+br
+- @appointments.each do |appointment|
+    = appointment["date"]
+    br
