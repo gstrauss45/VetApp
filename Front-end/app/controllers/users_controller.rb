@@ -12,7 +12,6 @@ class UsersController < ApplicationController
     end
 
     def index
-        # @users = User.all
     end
 
       def create
@@ -28,13 +27,11 @@ class UsersController < ApplicationController
       def vet_pets
         response = request_api("http://localhost:8080/vet_pets", "post", nil)
         @pets = JSON.parse response.body
-        # @pets = Pet.all.where(vet_id: current_user.id)
       end
 
       def vet_appointments
         response = request_api("http://localhost:8080/vet_appointments", "post", nil)
         @appointments = JSON.parse response.body
-        # @appointments = Appointment.all.where(vet_id: current.id)
       end
 
       def vet_pet_appointment
@@ -42,10 +39,11 @@ class UsersController < ApplicationController
         json_array = JSON.parse response.body
         @pet = json_array.first
         @appointments = json_array.last
-        # @pet = Pet.find(params[:pet_id])
-        # if @pet.appointments?
-        #   @appointments = @pet.appointments
-        # end
+      end
+
+      def vet_registration
+        response = request_api("http://localhost:8080/vet_registration", "post", nil)
+        redirect_to vet_pet_appointment_path(id: params[:pet_id])
       end
 
       private

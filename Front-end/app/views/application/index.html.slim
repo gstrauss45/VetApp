@@ -1,4 +1,5 @@
 - if @role == 'owner'
+    |Add new Pet:
     = form_with url: "http://localhost:3000/pet_add", method: :post do |form|
         = form.label :name
         = form.text_field :name

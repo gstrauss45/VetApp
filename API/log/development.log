@@ -305,3 +305,2525 @@ Processing by ApplicationController#index as */*
 Completed 200 OK in 3ms (Views: 0.2ms | ActiveRecord: 0.3ms | Allocations: 1004)
 
 
+Started POST "/signup" for ::1 at 2021-12-20 05:44:45 +0200
+  [1m[35m (2.7ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by UsersController#create as */*
+  Parameters: {"email"=>"1234", "name"=>"1234", "password"=>"[FILTERED]", "confirm_password"=>"[FILTERED]", "role"=>"owner", "user"=>{"role"=>"owner", "name"=>"1234", "email"=>"1234"}}
+[31mUnpermitted parameters: :confirm_password, :user[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/users_controller.rb:4:in `create'
+  [1m[36mUser Create (4.7ms)[0m  [1m[32mINSERT INTO "users" ("role", "name", "email", "password_digest", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["role", 0], ["name", "1234"], ["email", "1234"], ["password_digest", "$2a$12$zq2Kas0iCUjGHw4faT9VPuVrEshmUoCy1xGUpVRG3UMwy.YonB4aK"], ["created_at", "2021-12-20 03:44:46.067415"], ["updated_at", "2021-12-20 03:44:46.067415"]]
+  ↳ app/controllers/users_controller.rb:4:in `create'
+  [1m[36mTRANSACTION (0.9ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/controllers/users_controller.rb:4:in `create'
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "1234"], ["LIMIT", 1]]
+  ↳ app/auth/authenticate_user.rb:18:in `user'
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "1234"], ["LIMIT", 1]]
+  ↳ app/auth/authenticate_user.rb:18:in `user'
+[active_model_serializers] Rendered ActiveModel::Serializer::Null with Hash (0.14ms)
+Completed 201 Created in 901ms (Views: 2.0ms | ActiveRecord: 82.2ms | Allocations: 11651)
+
+
+Started POST "/index" for ::1 at 2021-12-20 05:44:46 +0200
+Processing by ApplicationController#index as */*
+  Parameters: {"application"=>{}}
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/auth/authorize_api_request.rb:20:in `user'
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:10:in `index'
+Completed 200 OK in 5ms (Views: 0.6ms | ActiveRecord: 0.3ms | Allocations: 1376)
+
+
+Started POST "/pet_add" for ::1 at 2021-12-20 05:45:17 +0200
+Processing by PetsController#create as */*
+  Parameters: {"name"=>"first pet", "application"=>{"name"=>"first pet"}}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/auth/authorize_api_request.rb:20:in `user'
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/pets_controller.rb:15:in `create'
+  [1m[36mPet Create (43.8ms)[0m  [1m[32mINSERT INTO "pets" ("name", "user_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["name", "first pet"], ["user_id", 2], ["created_at", "2021-12-20 03:45:17.934292"], ["updated_at", "2021-12-20 03:45:17.934292"]]
+  ↳ app/controllers/pets_controller.rb:15:in `create'
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/controllers/pets_controller.rb:15:in `create'
+Completed 201 Created in 61ms (Views: 0.2ms | ActiveRecord: 47.6ms | Allocations: 5798)
+
+
+Started POST "/index" for ::1 at 2021-12-20 05:45:17 +0200
+Processing by ApplicationController#index as */*
+  Parameters: {"application"=>{}}
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/auth/authorize_api_request.rb:20:in `user'
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:10:in `index'
+Completed 200 OK in 3ms (Views: 0.2ms | ActiveRecord: 0.4ms | Allocations: 1008)
+
+
+Started GET "/pets_list" for ::1 at 2021-12-20 05:46:26 +0200
+Processing by PetsController#index as */*
+  Parameters: {"application"=>{}}
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/auth/authorize_api_request.rb:20:in `user'
+  [1m[36mPet Load (0.5ms)[0m  [1m[34mSELECT "pets".* FROM "pets" WHERE "pets"."user_id" = $1[0m  [["user_id", 2]]
+  ↳ app/controllers/pets_controller.rb:5:in `index'
+No serializer found for resource: #<Pet id: 1, name: "first pet", user_id: 2, created_at: "2021-12-20 03:45:17.934292000 +0000", updated_at: "2021-12-20 03:45:17.934292000 +0000", vet_id: nil>
+[active_model_serializers]   [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."role" = $1[0m  [["role", 1]]
+[active_model_serializers]   ↳ app/controllers/pets_controller.rb:5:in `index'
+[active_model_serializers] Rendered ActiveModel::Serializer::CollectionSerializer with Array (2.55ms)
+Completed 200 OK in 11ms (Views: 7.0ms | ActiveRecord: 1.1ms | Allocations: 3077)
+
+
+Started POST "/register" for ::1 at 2021-12-20 05:46:34 +0200
+Processing by PetsController#register as */*
+  Parameters: {"pet_id"=>"1", "vet_id"=>"1", "application"=>{"pet_id"=>"1", "vet_id"=>"1"}}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/auth/authorize_api_request.rb:20:in `user'
+  [1m[36mPet Load (0.2ms)[0m  [1m[34mSELECT "pets".* FROM "pets" WHERE "pets"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/pets_controller.rb:55:in `register'
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/pets_controller.rb:57:in `register'
+  [1m[36mPet Update (0.3ms)[0m  [1m[33mUPDATE "pets" SET "updated_at" = $1, "vet_id" = $2 WHERE "pets"."id" = $3[0m  [["updated_at", "2021-12-20 03:46:34.654822"], ["vet_id", 1], ["id", 1]]
+  ↳ app/controllers/pets_controller.rb:57:in `register'
+  [1m[36mTRANSACTION (0.8ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/controllers/pets_controller.rb:57:in `register'
+Completed 201 Created in 8ms (Views: 0.1ms | ActiveRecord: 1.6ms | Allocations: 2790)
+
+
+Started GET "/pets_list" for ::1 at 2021-12-20 05:46:38 +0200
+Processing by PetsController#index as */*
+  Parameters: {"application"=>{}}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/auth/authorize_api_request.rb:20:in `user'
+  [1m[36mPet Load (0.2ms)[0m  [1m[34mSELECT "pets".* FROM "pets" WHERE "pets"."user_id" = $1[0m  [["user_id", 2]]
+  ↳ app/controllers/pets_controller.rb:5:in `index'
+No serializer found for resource: #<Pet id: 1, name: "first pet", user_id: 2, created_at: "2021-12-20 03:45:17.934292000 +0000", updated_at: "2021-12-20 03:46:34.654822000 +0000", vet_id: 1>
+[active_model_serializers]   [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."role" = $1[0m  [["role", 1]]
+[active_model_serializers]   ↳ app/controllers/pets_controller.rb:5:in `index'
+[active_model_serializers] Rendered ActiveModel::Serializer::CollectionSerializer with Array (1.72ms)
+Completed 200 OK in 6ms (Views: 3.2ms | ActiveRecord: 0.7ms | Allocations: 2311)
+
+
+Started POST "/appointment_create" for ::1 at 2021-12-20 05:46:57 +0200
+Processing by AppointmentsController#create as */*
+  Parameters: {"pet_id"=>"1", "vet_id"=>"1", "date"=>"2021-12-15", "application"=>{"pet_id"=>"1", "vet_id"=>"1", "date"=>"2021-12-15"}}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/auth/authorize_api_request.rb:20:in `user'
+Completed 400 Bad Request in 3ms (ActiveRecord: 0.2ms | Allocations: 916)
+
+
+  
+ActionController::ParameterMissing (param is missing or the value is empty: appointment
+Did you mean?  application
+               action
+               controller
+               date):
+  
+app/controllers/appointments_controller.rb:12:in `appointment_params'
+app/controllers/appointments_controller.rb:3:in `create'
+Started GET "/pets_list" for ::1 at 2021-12-20 05:46:59 +0200
+Processing by PetsController#index as */*
+  Parameters: {"application"=>{}}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/auth/authorize_api_request.rb:20:in `user'
+  [1m[36mPet Load (0.3ms)[0m  [1m[34mSELECT "pets".* FROM "pets" WHERE "pets"."user_id" = $1[0m  [["user_id", 2]]
+  ↳ app/controllers/pets_controller.rb:5:in `index'
+No serializer found for resource: #<Pet id: 1, name: "first pet", user_id: 2, created_at: "2021-12-20 03:45:17.934292000 +0000", updated_at: "2021-12-20 03:46:34.654822000 +0000", vet_id: 1>
+[active_model_serializers]   [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."role" = $1[0m  [["role", 1]]
+[active_model_serializers]   ↳ app/controllers/pets_controller.rb:5:in `index'
+[active_model_serializers] Rendered ActiveModel::Serializer::CollectionSerializer with Array (1.62ms)
+Completed 200 OK in 6ms (Views: 3.2ms | ActiveRecord: 0.7ms | Allocations: 2315)
+
+
+Started GET "/pet_show" for ::1 at 2021-12-20 05:47:04 +0200
+Processing by PetsController#show as */*
+  Parameters: {"id"=>"1", "application"=>{"id"=>"1"}}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/auth/authorize_api_request.rb:20:in `user'
+  [1m[36mPet Load (6.2ms)[0m  [1m[34mSELECT "pets".* FROM "pets" WHERE "pets"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/pets_controller.rb:23:in `show'
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/pets_controller.rb:27:in `show'
+No serializer found for resource: #<Pet id: 1, name: "first pet", user_id: 2, created_at: "2021-12-20 03:45:17.934292000 +0000", updated_at: "2021-12-20 03:46:34.654822000 +0000", vet_id: 1>
+[active_model_serializers]   [1m[36mAppointment Load (0.8ms)[0m  [1m[34mSELECT "appointments".* FROM "appointments" WHERE "appointments"."pet_id" = $1[0m  [["pet_id", 1]]
+[active_model_serializers]   ↳ app/controllers/pets_controller.rb:29:in `show'
+[active_model_serializers] Rendered ActiveModel::Serializer::CollectionSerializer with Array (2.3ms)
+Completed 200 OK in 56ms (Views: 2.2ms | ActiveRecord: 48.4ms | Allocations: 3043)
+
+
+Started GET "/pet_show" for ::1 at 2021-12-20 05:47:06 +0200
+Processing by PetsController#show as */*
+  Parameters: {"id"=>"1", "application"=>{"id"=>"1"}}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/auth/authorize_api_request.rb:20:in `user'
+  [1m[36mPet Load (0.2ms)[0m  [1m[34mSELECT "pets".* FROM "pets" WHERE "pets"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/pets_controller.rb:23:in `show'
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/pets_controller.rb:27:in `show'
+No serializer found for resource: #<Pet id: 1, name: "first pet", user_id: 2, created_at: "2021-12-20 03:45:17.934292000 +0000", updated_at: "2021-12-20 03:46:34.654822000 +0000", vet_id: 1>
+[active_model_serializers]   [1m[36mAppointment Load (0.1ms)[0m  [1m[34mSELECT "appointments".* FROM "appointments" WHERE "appointments"."pet_id" = $1[0m  [["pet_id", 1]]
+[active_model_serializers]   ↳ app/controllers/pets_controller.rb:29:in `show'
+[active_model_serializers] Rendered ActiveModel::Serializer::CollectionSerializer with Array (1.41ms)
+Completed 200 OK in 6ms (Views: 1.8ms | ActiveRecord: 0.6ms | Allocations: 2469)
+
+
+Started GET "/pets_list" for ::1 at 2021-12-20 05:47:07 +0200
+Processing by PetsController#index as */*
+  Parameters: {"application"=>{}}
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/auth/authorize_api_request.rb:20:in `user'
+  [1m[36mPet Load (0.3ms)[0m  [1m[34mSELECT "pets".* FROM "pets" WHERE "pets"."user_id" = $1[0m  [["user_id", 2]]
+  ↳ app/controllers/pets_controller.rb:5:in `index'
+No serializer found for resource: #<Pet id: 1, name: "first pet", user_id: 2, created_at: "2021-12-20 03:45:17.934292000 +0000", updated_at: "2021-12-20 03:46:34.654822000 +0000", vet_id: 1>
+[active_model_serializers]   [1m[36mUser Load (3.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."role" = $1[0m  [["role", 1]]
+[active_model_serializers]   ↳ app/controllers/pets_controller.rb:5:in `index'
+[active_model_serializers] Rendered ActiveModel::Serializer::CollectionSerializer with Array (5.07ms)
+Completed 200 OK in 10ms (Views: 4.5ms | ActiveRecord: 3.5ms | Allocations: 2310)
+
+
+Started POST "/appointment_create" for ::1 at 2021-12-20 05:47:15 +0200
+Processing by AppointmentsController#create as */*
+  Parameters: {"pet_id"=>"1", "vet_id"=>"1", "date"=>"2021-12-25", "application"=>{"pet_id"=>"1", "vet_id"=>"1", "date"=>"2021-12-25"}}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/auth/authorize_api_request.rb:20:in `user'
+Completed 400 Bad Request in 2ms (ActiveRecord: 0.2ms | Allocations: 670)
+
+
+  
+ActionController::ParameterMissing (param is missing or the value is empty: appointment
+Did you mean?  application
+               action
+               controller
+               date):
+  
+app/controllers/appointments_controller.rb:12:in `appointment_params'
+app/controllers/appointments_controller.rb:3:in `create'
+Started GET "/pet_show" for ::1 at 2021-12-20 05:47:18 +0200
+Processing by PetsController#show as */*
+  Parameters: {"id"=>"1", "application"=>{"id"=>"1"}}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/auth/authorize_api_request.rb:20:in `user'
+  [1m[36mPet Load (0.7ms)[0m  [1m[34mSELECT "pets".* FROM "pets" WHERE "pets"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/pets_controller.rb:23:in `show'
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/pets_controller.rb:27:in `show'
+No serializer found for resource: #<Pet id: 1, name: "first pet", user_id: 2, created_at: "2021-12-20 03:45:17.934292000 +0000", updated_at: "2021-12-20 03:46:34.654822000 +0000", vet_id: 1>
+[active_model_serializers]   [1m[36mAppointment Load (2.6ms)[0m  [1m[34mSELECT "appointments".* FROM "appointments" WHERE "appointments"."pet_id" = $1[0m  [["pet_id", 1]]
+[active_model_serializers]   ↳ app/controllers/pets_controller.rb:29:in `show'
+[active_model_serializers] Rendered ActiveModel::Serializer::CollectionSerializer with Array (4.44ms)
+Completed 200 OK in 10ms (Views: 2.6ms | ActiveRecord: 3.7ms | Allocations: 2469)
+
+
+Started GET "/pet_show" for ::1 at 2021-12-20 05:47:19 +0200
+Processing by PetsController#show as */*
+  Parameters: {"id"=>"1", "application"=>{"id"=>"1"}}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/auth/authorize_api_request.rb:20:in `user'
+  [1m[36mPet Load (0.2ms)[0m  [1m[34mSELECT "pets".* FROM "pets" WHERE "pets"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/pets_controller.rb:23:in `show'
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/pets_controller.rb:27:in `show'
+No serializer found for resource: #<Pet id: 1, name: "first pet", user_id: 2, created_at: "2021-12-20 03:45:17.934292000 +0000", updated_at: "2021-12-20 03:46:34.654822000 +0000", vet_id: 1>
+[active_model_serializers]   [1m[36mAppointment Load (0.2ms)[0m  [1m[34mSELECT "appointments".* FROM "appointments" WHERE "appointments"."pet_id" = $1[0m  [["pet_id", 1]]
+[active_model_serializers]   ↳ app/controllers/pets_controller.rb:29:in `show'
+[active_model_serializers] Rendered ActiveModel::Serializer::CollectionSerializer with Array (1.54ms)
+Completed 200 OK in 6ms (Views: 2.0ms | ActiveRecord: 0.7ms | Allocations: 2469)
+
+
+Started GET "/pets_list" for ::1 at 2021-12-20 05:47:20 +0200
+Processing by PetsController#index as */*
+  Parameters: {"application"=>{}}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/auth/authorize_api_request.rb:20:in `user'
+  [1m[36mPet Load (0.2ms)[0m  [1m[34mSELECT "pets".* FROM "pets" WHERE "pets"."user_id" = $1[0m  [["user_id", 2]]
+  ↳ app/controllers/pets_controller.rb:5:in `index'
+No serializer found for resource: #<Pet id: 1, name: "first pet", user_id: 2, created_at: "2021-12-20 03:45:17.934292000 +0000", updated_at: "2021-12-20 03:46:34.654822000 +0000", vet_id: 1>
+[active_model_serializers]   [1m[36mUser Load (3.7ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."role" = $1[0m  [["role", 1]]
+[active_model_serializers]   ↳ app/controllers/pets_controller.rb:5:in `index'
+[active_model_serializers] Rendered ActiveModel::Serializer::CollectionSerializer with Array (6.35ms)
+Completed 200 OK in 11ms (Views: 4.8ms | ActiveRecord: 4.1ms | Allocations: 2310)
+
+
+Started GET "/pet_show" for ::1 at 2021-12-20 05:47:23 +0200
+Processing by PetsController#show as */*
+  Parameters: {"id"=>"1", "application"=>{"id"=>"1"}}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/auth/authorize_api_request.rb:20:in `user'
+  [1m[36mPet Load (0.3ms)[0m  [1m[34mSELECT "pets".* FROM "pets" WHERE "pets"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/pets_controller.rb:23:in `show'
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/pets_controller.rb:27:in `show'
+No serializer found for resource: #<Pet id: 1, name: "first pet", user_id: 2, created_at: "2021-12-20 03:45:17.934292000 +0000", updated_at: "2021-12-20 03:46:34.654822000 +0000", vet_id: 1>
+[active_model_serializers]   [1m[36mAppointment Load (2.0ms)[0m  [1m[34mSELECT "appointments".* FROM "appointments" WHERE "appointments"."pet_id" = $1[0m  [["pet_id", 1]]
+[active_model_serializers]   ↳ app/controllers/pets_controller.rb:29:in `show'
+[active_model_serializers] Rendered ActiveModel::Serializer::CollectionSerializer with Array (3.8ms)
+Completed 200 OK in 10ms (Views: 2.5ms | ActiveRecord: 2.9ms | Allocations: 2470)
+
+
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" /* loading for inspect */ LIMIT $1[0m  [["LIMIT", 11]]
+  [1m[35m (2.4ms)[0m  [1m[34mSELECT COUNT(*) FROM "users"[0m
+  [1m[36mAppointment Load (0.4ms)[0m  [1m[34mSELECT "appointments".* FROM "appointments" /* loading for inspect */ LIMIT $1[0m  [["LIMIT", 11]]
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT COUNT(*) FROM "appointments"[0m
+Started POST "/index" for ::1 at 2021-12-20 05:51:12 +0200
+Processing by ApplicationController#index as */*
+  Parameters: {"application"=>{}}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/auth/authorize_api_request.rb:20:in `user'
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:10:in `index'
+Completed 200 OK in 3ms (Views: 0.2ms | ActiveRecord: 0.2ms | Allocations: 990)
+
+
+Started GET "/pets_list" for ::1 at 2021-12-20 05:51:15 +0200
+Processing by PetsController#index as */*
+  Parameters: {"application"=>{}}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/auth/authorize_api_request.rb:20:in `user'
+  [1m[36mPet Load (0.3ms)[0m  [1m[34mSELECT "pets".* FROM "pets" WHERE "pets"."user_id" = $1[0m  [["user_id", 2]]
+  ↳ app/controllers/pets_controller.rb:5:in `index'
+No serializer found for resource: #<Pet id: 1, name: "first pet", user_id: 2, created_at: "2021-12-20 03:45:17.934292000 +0000", updated_at: "2021-12-20 03:46:34.654822000 +0000", vet_id: 1>
+[active_model_serializers]   [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."role" = $1[0m  [["role", 1]]
+[active_model_serializers]   ↳ app/controllers/pets_controller.rb:5:in `index'
+[active_model_serializers] Rendered ActiveModel::Serializer::CollectionSerializer with Array (1.49ms)
+Completed 200 OK in 6ms (Views: 2.9ms | ActiveRecord: 0.7ms | Allocations: 2310)
+
+
+Started GET "/pets_list" for ::1 at 2021-12-20 05:52:06 +0200
+Processing by PetsController#index as */*
+  Parameters: {"application"=>{}}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/auth/authorize_api_request.rb:20:in `user'
+  [1m[36mPet Load (0.2ms)[0m  [1m[34mSELECT "pets".* FROM "pets" WHERE "pets"."user_id" = $1[0m  [["user_id", 2]]
+  ↳ app/controllers/pets_controller.rb:5:in `index'
+No serializer found for resource: #<Pet id: 1, name: "first pet", user_id: 2, created_at: "2021-12-20 03:45:17.934292000 +0000", updated_at: "2021-12-20 03:46:34.654822000 +0000", vet_id: 1>
+[active_model_serializers]   [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."role" = $1[0m  [["role", 1]]
+[active_model_serializers]   ↳ app/controllers/pets_controller.rb:5:in `index'
+[active_model_serializers] Rendered ActiveModel::Serializer::CollectionSerializer with Array (1.46ms)
+Completed 200 OK in 5ms (Views: 3.0ms | ActiveRecord: 0.5ms | Allocations: 2310)
+
+
+Started POST "/index" for ::1 at 2021-12-20 05:52:10 +0200
+Processing by ApplicationController#index as */*
+  Parameters: {"application"=>{}}
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/auth/authorize_api_request.rb:20:in `user'
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:10:in `index'
+Completed 200 OK in 2ms (Views: 0.2ms | ActiveRecord: 0.2ms | Allocations: 988)
+
+
+Started POST "/index" for ::1 at 2021-12-20 05:52:27 +0200
+Processing by ApplicationController#index as */*
+  Parameters: {"application"=>{}}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/auth/authorize_api_request.rb:20:in `user'
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:10:in `index'
+Completed 200 OK in 2ms (Views: 0.2ms | ActiveRecord: 0.2ms | Allocations: 988)
+
+
+Started POST "/index" for ::1 at 2021-12-20 05:54:11 +0200
+Processing by ApplicationController#index as */*
+  Parameters: {"application"=>{}}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/auth/authorize_api_request.rb:20:in `user'
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:10:in `index'
+Completed 200 OK in 3ms (Views: 0.2ms | ActiveRecord: 0.2ms | Allocations: 988)
+
+
+Started GET "/pets_list" for ::1 at 2021-12-20 05:54:13 +0200
+Processing by PetsController#index as */*
+  Parameters: {"application"=>{}}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/auth/authorize_api_request.rb:20:in `user'
+  [1m[36mPet Load (4.3ms)[0m  [1m[34mSELECT "pets".* FROM "pets" WHERE "pets"."user_id" = $1[0m  [["user_id", 2]]
+  ↳ app/controllers/pets_controller.rb:5:in `index'
+No serializer found for resource: #<Pet id: 1, name: "first pet", user_id: 2, created_at: "2021-12-20 03:45:17.934292000 +0000", updated_at: "2021-12-20 03:46:34.654822000 +0000", vet_id: 1>
+[active_model_serializers]   [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."role" = $1[0m  [["role", 1]]
+[active_model_serializers]   ↳ app/controllers/pets_controller.rb:5:in `index'
+[active_model_serializers] Rendered ActiveModel::Serializer::CollectionSerializer with Array (2.52ms)
+Completed 200 OK in 11ms (Views: 4.8ms | ActiveRecord: 4.7ms | Allocations: 2310)
+
+
+Started POST "/appointment_create" for ::1 at 2021-12-20 05:54:18 +0200
+Processing by AppointmentsController#create as */*
+  Parameters: {"pet_id"=>"1", "vet_id"=>"1", "date"=>"2021-12-31", "application"=>{"pet_id"=>"1", "vet_id"=>"1", "date"=>"2021-12-31"}}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/auth/authorize_api_request.rb:20:in `user'
+Completed 400 Bad Request in 2ms (ActiveRecord: 0.2ms | Allocations: 670)
+
+
+  
+ActionController::ParameterMissing (param is missing or the value is empty: appointment
+Did you mean?  application
+               action
+               controller
+               date):
+  
+app/controllers/appointments_controller.rb:12:in `appointment_params'
+app/controllers/appointments_controller.rb:3:in `create'
+Started GET "/pets_list" for ::1 at 2021-12-20 05:56:25 +0200
+Processing by PetsController#index as */*
+  Parameters: {"pet"=>{}}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/auth/authorize_api_request.rb:20:in `user'
+  [1m[36mPet Load (0.2ms)[0m  [1m[34mSELECT "pets".* FROM "pets" WHERE "pets"."user_id" = $1[0m  [["user_id", 2]]
+  ↳ app/controllers/pets_controller.rb:5:in `index'
+No serializer found for resource: #<Pet id: 1, name: "first pet", user_id: 2, created_at: "2021-12-20 03:45:17.934292000 +0000", updated_at: "2021-12-20 03:46:34.654822000 +0000", vet_id: 1>
+[active_model_serializers]   [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."role" = $1[0m  [["role", 1]]
+[active_model_serializers]   ↳ app/controllers/pets_controller.rb:5:in `index'
+[active_model_serializers] Rendered ActiveModel::Serializer::CollectionSerializer with Array (1.89ms)
+Completed 200 OK in 24ms (Views: 9.0ms | ActiveRecord: 5.7ms | Allocations: 9644)
+
+
+Started POST "/appointment_create" for ::1 at 2021-12-20 05:56:29 +0200
+Processing by AppointmentsController#create as */*
+  Parameters: {"pet_id"=>"1", "vet_id"=>"1", "date"=>"2021-12-24", "appointment"=>{"pet_id"=>"1", "vet_id"=>"1", "date"=>"2021-12-24"}}
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/auth/authorize_api_request.rb:20:in `user'
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ (pry):1:in `create'
+  [1m[36mAppointment Create (2.2ms)[0m  [1m[32mINSERT INTO "appointments" ("pet_id", "vet_id", "date", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["pet_id", 1], ["vet_id", 1], ["date", "2021-12-24 00:00:00"], ["created_at", "2021-12-20 03:56:42.516040"], ["updated_at", "2021-12-20 03:56:42.516040"]]
+  ↳ (pry):1:in `create'
+  [1m[36mTRANSACTION (41.1ms)[0m  [1m[35mCOMMIT[0m
+  ↳ (pry):1:in `create'
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/appointments_controller.rb:4:in `create'
+  [1m[36mAppointment Create (0.9ms)[0m  [1m[32mINSERT INTO "appointments" ("pet_id", "vet_id", "date", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["pet_id", 1], ["vet_id", 1], ["date", "2021-12-24 00:00:00"], ["created_at", "2021-12-20 03:57:30.994590"], ["updated_at", "2021-12-20 03:57:30.994590"]]
+  ↳ app/controllers/appointments_controller.rb:4:in `create'
+  [1m[36mTRANSACTION (0.9ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/controllers/appointments_controller.rb:4:in `create'
+Completed 201 Created in 61920ms (Views: 0.2ms | ActiveRecord: 48.3ms | Allocations: 22879)
+
+
+Started POST "/appointment_create" for ::1 at 2021-12-20 05:57:51 +0200
+Processing by AppointmentsController#create as */*
+  Parameters: {"pet_id"=>"1", "vet_id"=>"1", "date"=>"2021-12-24", "appointment"=>{"pet_id"=>"1", "vet_id"=>"1", "date"=>"2021-12-24"}}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/auth/authorize_api_request.rb:20:in `user'
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/appointments_controller.rb:4:in `create'
+  [1m[36mAppointment Create (0.3ms)[0m  [1m[32mINSERT INTO "appointments" ("pet_id", "vet_id", "date", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["pet_id", 1], ["vet_id", 1], ["date", "2021-12-24 00:00:00"], ["created_at", "2021-12-20 03:57:51.058935"], ["updated_at", "2021-12-20 03:57:51.058935"]]
+  ↳ app/controllers/appointments_controller.rb:4:in `create'
+  [1m[36mTRANSACTION (39.8ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/controllers/appointments_controller.rb:4:in `create'
+Completed 201 Created in 52ms (Views: 0.2ms | ActiveRecord: 40.4ms | Allocations: 5754)
+
+
+Started GET "/pets_list" for ::1 at 2021-12-20 05:57:56 +0200
+Processing by PetsController#index as */*
+  Parameters: {"pet"=>{}}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/auth/authorize_api_request.rb:20:in `user'
+  [1m[36mPet Load (0.1ms)[0m  [1m[34mSELECT "pets".* FROM "pets" WHERE "pets"."user_id" = $1[0m  [["user_id", 2]]
+  ↳ app/controllers/pets_controller.rb:5:in `index'
+No serializer found for resource: #<Pet id: 1, name: "first pet", user_id: 2, created_at: "2021-12-20 03:45:17.934292000 +0000", updated_at: "2021-12-20 03:46:34.654822000 +0000", vet_id: 1>
+[active_model_serializers]   [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."role" = $1[0m  [["role", 1]]
+[active_model_serializers]   ↳ app/controllers/pets_controller.rb:5:in `index'
+[active_model_serializers] Rendered ActiveModel::Serializer::CollectionSerializer with Array (1.74ms)
+Completed 200 OK in 6ms (Views: 3.9ms | ActiveRecord: 0.4ms | Allocations: 2313)
+
+
+Started GET "/pet_show" for ::1 at 2021-12-20 05:57:58 +0200
+Processing by PetsController#show as */*
+  Parameters: {"id"=>"1", "pet"=>{"id"=>"1"}}
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/auth/authorize_api_request.rb:20:in `user'
+  [1m[36mPet Load (0.2ms)[0m  [1m[34mSELECT "pets".* FROM "pets" WHERE "pets"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/pets_controller.rb:23:in `show'
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/pets_controller.rb:27:in `show'
+No serializer found for resource: #<Pet id: 1, name: "first pet", user_id: 2, created_at: "2021-12-20 03:45:17.934292000 +0000", updated_at: "2021-12-20 03:46:34.654822000 +0000", vet_id: 1>
+[active_model_serializers]   [1m[36mAppointment Load (0.2ms)[0m  [1m[34mSELECT "appointments".* FROM "appointments" WHERE "appointments"."pet_id" = $1[0m  [["pet_id", 1]]
+[active_model_serializers]   ↳ app/controllers/pets_controller.rb:29:in `show'
+[active_model_serializers] Rendered ActiveModel::Serializer::CollectionSerializer with Array (2.55ms)
+Completed 200 OK in 12ms (Views: 3.0ms | ActiveRecord: 1.2ms | Allocations: 2990)
+
+
+Started POST "/appointment_create" for ::1 at 2021-12-20 05:58:04 +0200
+Processing by AppointmentsController#create as */*
+  Parameters: {"pet_id"=>"1", "vet_id"=>"1", "date"=>"2021-12-30", "appointment"=>{"pet_id"=>"1", "vet_id"=>"1", "date"=>"2021-12-30"}}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/auth/authorize_api_request.rb:20:in `user'
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/appointments_controller.rb:4:in `create'
+  [1m[36mAppointment Create (0.4ms)[0m  [1m[32mINSERT INTO "appointments" ("pet_id", "vet_id", "date", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["pet_id", 1], ["vet_id", 1], ["date", "2021-12-30 00:00:00"], ["created_at", "2021-12-20 03:58:06.246322"], ["updated_at", "2021-12-20 03:58:06.246322"]]
+  ↳ app/controllers/appointments_controller.rb:4:in `create'
+  [1m[36mTRANSACTION (0.9ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/controllers/appointments_controller.rb:4:in `create'
+Completed 201 Created in 1755ms (Views: 0.1ms | ActiveRecord: 1.7ms | Allocations: 7169)
+
+
+Started GET "/pet_show" for ::1 at 2021-12-20 05:58:08 +0200
+Processing by PetsController#show as */*
+  Parameters: {"id"=>"1", "pet"=>{"id"=>"1"}}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/auth/authorize_api_request.rb:20:in `user'
+  [1m[36mPet Load (0.2ms)[0m  [1m[34mSELECT "pets".* FROM "pets" WHERE "pets"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/pets_controller.rb:23:in `show'
+  [1m[36mUser Load (4.6ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/pets_controller.rb:27:in `show'
+No serializer found for resource: #<Pet id: 1, name: "first pet", user_id: 2, created_at: "2021-12-20 03:45:17.934292000 +0000", updated_at: "2021-12-20 03:46:34.654822000 +0000", vet_id: 1>
+[active_model_serializers]   [1m[36mAppointment Load (0.2ms)[0m  [1m[34mSELECT "appointments".* FROM "appointments" WHERE "appointments"."pet_id" = $1[0m  [["pet_id", 1]]
+[active_model_serializers]   ↳ app/controllers/pets_controller.rb:29:in `show'
+[active_model_serializers] Rendered ActiveModel::Serializer::CollectionSerializer with Array (2.62ms)
+Completed 200 OK in 14ms (Views: 3.4ms | ActiveRecord: 5.1ms | Allocations: 2873)
+
+
+Started GET "/pets_list" for ::1 at 2021-12-20 05:58:25 +0200
+Processing by PetsController#index as */*
+  Parameters: {"pet"=>{}}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/auth/authorize_api_request.rb:20:in `user'
+  [1m[36mPet Load (0.2ms)[0m  [1m[34mSELECT "pets".* FROM "pets" WHERE "pets"."user_id" = $1[0m  [["user_id", 2]]
+  ↳ app/controllers/pets_controller.rb:5:in `index'
+No serializer found for resource: #<Pet id: 1, name: "first pet", user_id: 2, created_at: "2021-12-20 03:45:17.934292000 +0000", updated_at: "2021-12-20 03:46:34.654822000 +0000", vet_id: 1>
+[active_model_serializers]   [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."role" = $1[0m  [["role", 1]]
+[active_model_serializers]   ↳ app/controllers/pets_controller.rb:5:in `index'
+[active_model_serializers] Rendered ActiveModel::Serializer::CollectionSerializer with Array (2.1ms)
+Completed 200 OK in 22ms (Views: 8.2ms | ActiveRecord: 5.7ms | Allocations: 9574)
+
+
+Started POST "/appointment_create" for ::1 at 2021-12-20 05:58:35 +0200
+Processing by AppointmentsController#create as */*
+  Parameters: {"pet_id"=>"1", "vet_id"=>"1", "date"=>"2033-10-31", "appointment"=>{"pet_id"=>"1", "vet_id"=>"1", "date"=>"2033-10-31"}}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/auth/authorize_api_request.rb:20:in `user'
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/appointments_controller.rb:3:in `create'
+  [1m[36mAppointment Create (0.3ms)[0m  [1m[32mINSERT INTO "appointments" ("pet_id", "vet_id", "date", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["pet_id", 1], ["vet_id", 1], ["date", "2033-10-31 00:00:00"], ["created_at", "2021-12-20 03:58:35.782586"], ["updated_at", "2021-12-20 03:58:35.782586"]]
+  ↳ app/controllers/appointments_controller.rb:3:in `create'
+  [1m[36mTRANSACTION (40.5ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/controllers/appointments_controller.rb:3:in `create'
+Completed 201 Created in 53ms (Views: 0.2ms | ActiveRecord: 43.4ms | Allocations: 4696)
+
+
+Started GET "/pet_show" for ::1 at 2021-12-20 05:58:37 +0200
+Processing by PetsController#show as */*
+  Parameters: {"id"=>"1", "pet"=>{"id"=>"1"}}
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/auth/authorize_api_request.rb:20:in `user'
+  [1m[36mPet Load (0.3ms)[0m  [1m[34mSELECT "pets".* FROM "pets" WHERE "pets"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/pets_controller.rb:23:in `show'
+  [1m[36mUser Load (6.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/pets_controller.rb:27:in `show'
+No serializer found for resource: #<Pet id: 1, name: "first pet", user_id: 2, created_at: "2021-12-20 03:45:17.934292000 +0000", updated_at: "2021-12-20 03:46:34.654822000 +0000", vet_id: 1>
+[active_model_serializers]   [1m[36mAppointment Load (0.2ms)[0m  [1m[34mSELECT "appointments".* FROM "appointments" WHERE "appointments"."pet_id" = $1[0m  [["pet_id", 1]]
+[active_model_serializers]   ↳ app/controllers/pets_controller.rb:29:in `show'
+[active_model_serializers] Rendered ActiveModel::Serializer::CollectionSerializer with Array (2.75ms)
+Completed 200 OK in 17ms (Views: 4.0ms | ActiveRecord: 6.8ms | Allocations: 3196)
+
+
+Started POST "/signup" for ::1 at 2021-12-20 05:59:24 +0200
+Processing by UsersController#create as */*
+  Parameters: {"email"=>"134", "name"=>"vet", "password"=>"[FILTERED]", "confirm_password"=>"[FILTERED]", "role"=>"vet", "user"=>{"role"=>"vet", "name"=>"vet", "email"=>"134"}}
+[31mUnpermitted parameters: :confirm_password, :user[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/users_controller.rb:4:in `create'
+  [1m[36mUser Create (0.4ms)[0m  [1m[32mINSERT INTO "users" ("role", "name", "email", "password_digest", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["role", 1], ["name", "vet"], ["email", "134"], ["password_digest", "$2a$12$RPEAeEeP7LF86H24vDljoewD3k84dD4iPlNnUrq3r1H99.9Sno82G"], ["created_at", "2021-12-20 03:59:25.068073"], ["updated_at", "2021-12-20 03:59:25.068073"]]
+  ↳ app/controllers/users_controller.rb:4:in `create'
+  [1m[36mTRANSACTION (1.0ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/controllers/users_controller.rb:4:in `create'
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "134"], ["LIMIT", 1]]
+  ↳ app/auth/authenticate_user.rb:18:in `user'
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "134"], ["LIMIT", 1]]
+  ↳ app/auth/authenticate_user.rb:18:in `user'
+[active_model_serializers] Rendered ActiveModel::Serializer::Null with Hash (0.1ms)
+Completed 201 Created in 851ms (Views: 0.8ms | ActiveRecord: 1.8ms | Allocations: 3502)
+
+
+Started POST "/index" for ::1 at 2021-12-20 05:59:25 +0200
+Processing by ApplicationController#index as */*
+  Parameters: {"application"=>{}}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/auth/authorize_api_request.rb:20:in `user'
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:10:in `index'
+Completed 200 OK in 3ms (Views: 0.3ms | ActiveRecord: 0.2ms | Allocations: 1083)
+
+
+Started POST "/index" for ::1 at 2021-12-20 05:59:30 +0200
+Processing by ApplicationController#index as */*
+  Parameters: {"application"=>{}}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/auth/authorize_api_request.rb:20:in `user'
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:10:in `index'
+Completed 200 OK in 3ms (Views: 0.2ms | ActiveRecord: 0.3ms | Allocations: 987)
+
+
+Started POST "/index" for ::1 at 2021-12-20 05:59:34 +0200
+Processing by ApplicationController#index as */*
+  Parameters: {"application"=>{}}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/auth/authorize_api_request.rb:20:in `user'
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:10:in `index'
+Completed 200 OK in 2ms (Views: 0.2ms | ActiveRecord: 0.2ms | Allocations: 987)
+
+
+Started POST "/vet_pets" for ::1 at 2021-12-20 05:59:35 +0200
+Processing by UsersController#vet_pets as */*
+  Parameters: {"user"=>{}}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/auth/authorize_api_request.rb:20:in `user'
+  [1m[36mPet Load (0.3ms)[0m  [1m[34mSELECT "pets".* FROM "pets" WHERE "pets"."vet_id" = $1[0m  [["vet_id", 3]]
+  ↳ app/controllers/users_controller.rb:12:in `vet_pets'
+[active_model_serializers] Rendered ActiveModel::Serializer::CollectionSerializer with ActiveModelSerializers::Adapter::Attributes (0.19ms)
+Completed 200 OK in 9ms (Views: 5.7ms | ActiveRecord: 0.4ms | Allocations: 1903)
+
+
+Started POST "/vet_appointments" for ::1 at 2021-12-20 05:59:37 +0200
+Processing by UsersController#vet_appointments as */*
+  Parameters: {"user"=>{}}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/auth/authorize_api_request.rb:20:in `user'
+  [1m[36mAppointment Load (0.2ms)[0m  [1m[34mSELECT "appointments".* FROM "appointments" WHERE "appointments"."vet_id" = $1[0m  [["vet_id", 3]]
+  ↳ app/controllers/users_controller.rb:17:in `vet_appointments'
+[active_model_serializers] Rendered ActiveModel::Serializer::CollectionSerializer with ActiveModelSerializers::Adapter::Attributes (0.06ms)
+Completed 200 OK in 4ms (Views: 1.5ms | ActiveRecord: 0.3ms | Allocations: 1387)
+
+
+Started GET "/pets_list" for ::1 at 2021-12-20 05:59:41 +0200
+Processing by PetsController#index as */*
+  Parameters: {"pet"=>{}}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/auth/authorize_api_request.rb:20:in `user'
+  [1m[36mPet Load (0.2ms)[0m  [1m[34mSELECT "pets".* FROM "pets" WHERE "pets"."user_id" = $1[0m  [["user_id", 2]]
+  ↳ app/controllers/pets_controller.rb:5:in `index'
+No serializer found for resource: #<Pet id: 1, name: "first pet", user_id: 2, created_at: "2021-12-20 03:45:17.934292000 +0000", updated_at: "2021-12-20 03:46:34.654822000 +0000", vet_id: 1>
+[active_model_serializers]   [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."role" = $1[0m  [["role", 1]]
+[active_model_serializers]   ↳ app/controllers/pets_controller.rb:5:in `index'
+[active_model_serializers] Rendered ActiveModel::Serializer::CollectionSerializer with Array (2.05ms)
+Completed 200 OK in 7ms (Views: 3.8ms | ActiveRecord: 0.5ms | Allocations: 2422)
+
+
+Started POST "/register" for ::1 at 2021-12-20 05:59:44 +0200
+Processing by PetsController#register as */*
+  Parameters: {"pet_id"=>"1", "vet_id"=>"3", "pet"=>{"vet_id"=>"3"}}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/auth/authorize_api_request.rb:20:in `user'
+  [1m[36mPet Load (0.2ms)[0m  [1m[34mSELECT "pets".* FROM "pets" WHERE "pets"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/pets_controller.rb:55:in `register'
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/pets_controller.rb:57:in `register'
+  [1m[36mPet Update (0.3ms)[0m  [1m[33mUPDATE "pets" SET "updated_at" = $1, "vet_id" = $2 WHERE "pets"."id" = $3[0m  [["updated_at", "2021-12-20 03:59:44.123236"], ["vet_id", 3], ["id", 1]]
+  ↳ app/controllers/pets_controller.rb:57:in `register'
+  [1m[36mTRANSACTION (40.3ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/controllers/pets_controller.rb:57:in `register'
+Completed 201 Created in 48ms (Views: 0.2ms | ActiveRecord: 41.2ms | Allocations: 2619)
+
+
+Started POST "/vet_pets" for ::1 at 2021-12-20 05:59:45 +0200
+Processing by UsersController#vet_pets as */*
+  Parameters: {"user"=>{}}
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/auth/authorize_api_request.rb:20:in `user'
+  [1m[36mPet Load (0.2ms)[0m  [1m[34mSELECT "pets".* FROM "pets" WHERE "pets"."vet_id" = $1[0m  [["vet_id", 3]]
+  ↳ app/controllers/users_controller.rb:12:in `vet_pets'
+No serializer found for resource: #<Pet id: 1, name: "first pet", user_id: 2, created_at: "2021-12-20 03:45:17.934292000 +0000", updated_at: "2021-12-20 03:59:44.123236000 +0000", vet_id: 3>
+[active_model_serializers] Rendered ActiveModel::Serializer::CollectionSerializer with Pet::ActiveRecord_Relation (0.19ms)
+Completed 200 OK in 5ms (Views: 2.0ms | ActiveRecord: 0.5ms | Allocations: 1518)
+
+
+Started POST "/vet_pet_appointment" for ::1 at 2021-12-20 05:59:47 +0200
+Processing by UsersController#vet_pet_appointment as */*
+  Parameters: {"pet_id"=>"1", "user"=>{}}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/auth/authorize_api_request.rb:20:in `user'
+  [1m[36mPet Load (0.1ms)[0m  [1m[34mSELECT "pets".* FROM "pets" WHERE "pets"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:21:in `vet_pet_appointment'
+No serializer found for resource: #<Pet id: 1, name: "first pet", user_id: 2, created_at: "2021-12-20 03:45:17.934292000 +0000", updated_at: "2021-12-20 03:59:44.123236000 +0000", vet_id: 3>
+[active_model_serializers]   [1m[36mAppointment Load (0.2ms)[0m  [1m[34mSELECT "appointments".* FROM "appointments" WHERE "appointments"."pet_id" = $1[0m  [["pet_id", 1]]
+[active_model_serializers]   ↳ app/controllers/users_controller.rb:23:in `vet_pet_appointment'
+[active_model_serializers] Rendered ActiveModel::Serializer::CollectionSerializer with Array (3.19ms)
+Completed 200 OK in 7ms (Views: 3.7ms | ActiveRecord: 0.5ms | Allocations: 2518)
+
+
+Started POST "/vet_appointments" for ::1 at 2021-12-20 05:59:50 +0200
+Processing by UsersController#vet_appointments as */*
+  Parameters: {"user"=>{}}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/auth/authorize_api_request.rb:20:in `user'
+  [1m[36mAppointment Load (0.2ms)[0m  [1m[34mSELECT "appointments".* FROM "appointments" WHERE "appointments"."vet_id" = $1[0m  [["vet_id", 3]]
+  ↳ app/controllers/users_controller.rb:17:in `vet_appointments'
+[active_model_serializers] Rendered ActiveModel::Serializer::CollectionSerializer with ActiveModelSerializers::Adapter::Attributes (0.06ms)
+Completed 200 OK in 4ms (Views: 1.7ms | ActiveRecord: 0.4ms | Allocations: 1379)
+
+
+Started POST "/appointment_create" for ::1 at 2021-12-20 05:59:57 +0200
+Processing by AppointmentsController#create as */*
+  Parameters: {"pet_id"=>"1", "vet_id"=>"1", "date"=>"2021-12-17", "appointment"=>{"pet_id"=>"1", "vet_id"=>"1", "date"=>"2021-12-17"}}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/auth/authorize_api_request.rb:20:in `user'
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/appointments_controller.rb:3:in `create'
+  [1m[36mAppointment Create (0.3ms)[0m  [1m[32mINSERT INTO "appointments" ("pet_id", "vet_id", "date", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["pet_id", 1], ["vet_id", 1], ["date", "2021-12-17 00:00:00"], ["created_at", "2021-12-20 03:59:57.350456"], ["updated_at", "2021-12-20 03:59:57.350456"]]
+  ↳ app/controllers/appointments_controller.rb:3:in `create'
+  [1m[36mTRANSACTION (35.6ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/controllers/appointments_controller.rb:3:in `create'
+Completed 201 Created in 42ms (Views: 0.2ms | ActiveRecord: 36.2ms | Allocations: 2267)
+
+
+Started POST "/vet_appointments" for ::1 at 2021-12-20 05:59:59 +0200
+Processing by UsersController#vet_appointments as */*
+  Parameters: {"user"=>{}}
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/auth/authorize_api_request.rb:20:in `user'
+  [1m[36mAppointment Load (0.2ms)[0m  [1m[34mSELECT "appointments".* FROM "appointments" WHERE "appointments"."vet_id" = $1[0m  [["vet_id", 3]]
+  ↳ app/controllers/users_controller.rb:17:in `vet_appointments'
+[active_model_serializers] Rendered ActiveModel::Serializer::CollectionSerializer with ActiveModelSerializers::Adapter::Attributes (0.15ms)
+Completed 200 OK in 4ms (Views: 1.8ms | ActiveRecord: 0.6ms | Allocations: 1379)
+
+
+Started POST "/vet_appointments" for ::1 at 2021-12-20 06:00:01 +0200
+Processing by UsersController#vet_appointments as */*
+  Parameters: {"user"=>{}}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/auth/authorize_api_request.rb:20:in `user'
+  [1m[36mAppointment Load (0.2ms)[0m  [1m[34mSELECT "appointments".* FROM "appointments" WHERE "appointments"."vet_id" = $1[0m  [["vet_id", 3]]
+  ↳ app/controllers/users_controller.rb:17:in `vet_appointments'
+[active_model_serializers] Rendered ActiveModel::Serializer::CollectionSerializer with ActiveModelSerializers::Adapter::Attributes (0.06ms)
+Completed 200 OK in 3ms (Views: 1.3ms | ActiveRecord: 0.4ms | Allocations: 1379)
+
+
+Started GET "/pets_list" for ::1 at 2021-12-20 06:00:03 +0200
+Processing by PetsController#index as */*
+  Parameters: {"pet"=>{}}
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/auth/authorize_api_request.rb:20:in `user'
+  [1m[36mPet Load (0.1ms)[0m  [1m[34mSELECT "pets".* FROM "pets" WHERE "pets"."user_id" = $1[0m  [["user_id", 2]]
+  ↳ app/controllers/pets_controller.rb:5:in `index'
+No serializer found for resource: #<Pet id: 1, name: "first pet", user_id: 2, created_at: "2021-12-20 03:45:17.934292000 +0000", updated_at: "2021-12-20 03:59:44.123236000 +0000", vet_id: 3>
+[active_model_serializers]   [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."role" = $1[0m  [["role", 1]]
+[active_model_serializers]   ↳ app/controllers/pets_controller.rb:5:in `index'
+[active_model_serializers] Rendered ActiveModel::Serializer::CollectionSerializer with Array (2.37ms)
+Completed 200 OK in 6ms (Views: 3.8ms | ActiveRecord: 0.5ms | Allocations: 2424)
+
+
+Started POST "/vet_appointments" for ::1 at 2021-12-20 06:00:05 +0200
+Processing by UsersController#vet_appointments as */*
+  Parameters: {"user"=>{}}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/auth/authorize_api_request.rb:20:in `user'
+  [1m[36mAppointment Load (0.2ms)[0m  [1m[34mSELECT "appointments".* FROM "appointments" WHERE "appointments"."vet_id" = $1[0m  [["vet_id", 3]]
+  ↳ app/controllers/users_controller.rb:17:in `vet_appointments'
+[active_model_serializers] Rendered ActiveModel::Serializer::CollectionSerializer with ActiveModelSerializers::Adapter::Attributes (0.07ms)
+Completed 200 OK in 4ms (Views: 2.1ms | ActiveRecord: 0.4ms | Allocations: 1379)
+
+
+Started POST "/index" for ::1 at 2021-12-20 06:00:05 +0200
+Processing by ApplicationController#index as */*
+  Parameters: {"application"=>{}}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/auth/authorize_api_request.rb:20:in `user'
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:10:in `index'
+Completed 200 OK in 2ms (Views: 0.2ms | ActiveRecord: 0.2ms | Allocations: 988)
+
+
+Started GET "/pet_show" for ::1 at 2021-12-20 06:00:09 +0200
+Processing by PetsController#show as */*
+  Parameters: {"id"=>"1", "pet"=>{"id"=>"1"}}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/auth/authorize_api_request.rb:20:in `user'
+  [1m[36mPet Load (0.2ms)[0m  [1m[34mSELECT "pets".* FROM "pets" WHERE "pets"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/pets_controller.rb:23:in `show'
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/controllers/pets_controller.rb:27:in `show'
+No serializer found for resource: #<Pet id: 1, name: "first pet", user_id: 2, created_at: "2021-12-20 03:45:17.934292000 +0000", updated_at: "2021-12-20 03:59:44.123236000 +0000", vet_id: 3>
+[active_model_serializers]   [1m[36mAppointment Load (0.2ms)[0m  [1m[34mSELECT "appointments".* FROM "appointments" WHERE "appointments"."pet_id" = $1[0m  [["pet_id", 1]]
+[active_model_serializers]   ↳ app/controllers/pets_controller.rb:29:in `show'
+[active_model_serializers] Rendered ActiveModel::Serializer::CollectionSerializer with Array (4.53ms)
+Completed 200 OK in 10ms (Views: 5.6ms | ActiveRecord: 0.9ms | Allocations: 3076)
+
+
+Started POST "/appointment_create" for ::1 at 2021-12-20 06:00:19 +0200
+Processing by AppointmentsController#create as */*
+  Parameters: {"pet_id"=>"1", "vet_id"=>"3", "date"=>"2021-12-01", "appointment"=>{"pet_id"=>"1", "vet_id"=>"3", "date"=>"2021-12-01"}}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/auth/authorize_api_request.rb:20:in `user'
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/appointments_controller.rb:3:in `create'
+  [1m[36mAppointment Create (0.2ms)[0m  [1m[32mINSERT INTO "appointments" ("pet_id", "vet_id", "date", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["pet_id", 1], ["vet_id", 3], ["date", "2021-12-01 00:00:00"], ["created_at", "2021-12-20 04:00:19.457348"], ["updated_at", "2021-12-20 04:00:19.457348"]]
+  ↳ app/controllers/appointments_controller.rb:3:in `create'
+  [1m[36mTRANSACTION (40.5ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/controllers/appointments_controller.rb:3:in `create'
+Completed 201 Created in 46ms (Views: 0.2ms | ActiveRecord: 41.0ms | Allocations: 2266)
+
+
+Started POST "/vet_appointments" for ::1 at 2021-12-20 06:00:22 +0200
+Processing by UsersController#vet_appointments as */*
+  Parameters: {"user"=>{}}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/auth/authorize_api_request.rb:20:in `user'
+  [1m[36mAppointment Load (0.2ms)[0m  [1m[34mSELECT "appointments".* FROM "appointments" WHERE "appointments"."vet_id" = $1[0m  [["vet_id", 3]]
+  ↳ app/controllers/users_controller.rb:17:in `vet_appointments'
+No serializer found for resource: #<Appointment id: 7, pet_id: 1, vet_id: 3, date: "2021-12-01 00:00:00.000000000 +0000", created_at: "2021-12-20 04:00:19.457348000 +0000", updated_at: "2021-12-20 04:00:19.457348000 +0000">
+[active_model_serializers] Rendered ActiveModel::Serializer::CollectionSerializer with Appointment::ActiveRecord_Relation (0.15ms)
+Completed 200 OK in 4ms (Views: 2.1ms | ActiveRecord: 0.4ms | Allocations: 1624)
+
+
+Started POST "/vet_pets" for ::1 at 2021-12-20 06:00:55 +0200
+Processing by UsersController#vet_pets as */*
+  Parameters: {"user"=>{}}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/auth/authorize_api_request.rb:20:in `user'
+  [1m[36mPet Load (0.2ms)[0m  [1m[34mSELECT "pets".* FROM "pets" WHERE "pets"."vet_id" = $1[0m  [["vet_id", 3]]
+  ↳ app/controllers/users_controller.rb:12:in `vet_pets'
+No serializer found for resource: #<Pet id: 1, name: "first pet", user_id: 2, created_at: "2021-12-20 03:45:17.934292000 +0000", updated_at: "2021-12-20 03:59:44.123236000 +0000", vet_id: 3>
+[active_model_serializers] Rendered ActiveModel::Serializer::CollectionSerializer with Pet::ActiveRecord_Relation (0.18ms)
+Completed 200 OK in 4ms (Views: 2.1ms | ActiveRecord: 0.4ms | Allocations: 1515)
+
+
+Started POST "/vet_pet_appointment" for ::1 at 2021-12-20 06:00:56 +0200
+Processing by UsersController#vet_pet_appointment as */*
+  Parameters: {"pet_id"=>"1", "user"=>{}}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/auth/authorize_api_request.rb:20:in `user'
+  [1m[36mPet Load (0.1ms)[0m  [1m[34mSELECT "pets".* FROM "pets" WHERE "pets"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:21:in `vet_pet_appointment'
+No serializer found for resource: #<Pet id: 1, name: "first pet", user_id: 2, created_at: "2021-12-20 03:45:17.934292000 +0000", updated_at: "2021-12-20 03:59:44.123236000 +0000", vet_id: 3>
+[active_model_serializers]   [1m[36mAppointment Load (0.1ms)[0m  [1m[34mSELECT "appointments".* FROM "appointments" WHERE "appointments"."pet_id" = $1[0m  [["pet_id", 1]]
+[active_model_serializers]   ↳ app/controllers/users_controller.rb:23:in `vet_pet_appointment'
+[active_model_serializers] Rendered ActiveModel::Serializer::CollectionSerializer with Array (2.06ms)
+Completed 200 OK in 5ms (Views: 2.6ms | ActiveRecord: 0.5ms | Allocations: 2718)
+
+
+Started GET "/pets_list" for ::1 at 2021-12-20 06:01:52 +0200
+Processing by PetsController#index as */*
+  Parameters: {"pet"=>{}}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/auth/authorize_api_request.rb:20:in `user'
+  [1m[36mPet Load (0.2ms)[0m  [1m[34mSELECT "pets".* FROM "pets" WHERE "pets"."user_id" = $1[0m  [["user_id", 2]]
+  ↳ app/controllers/pets_controller.rb:5:in `index'
+No serializer found for resource: #<Pet id: 1, name: "first pet", user_id: 2, created_at: "2021-12-20 03:45:17.934292000 +0000", updated_at: "2021-12-20 03:59:44.123236000 +0000", vet_id: 3>
+[active_model_serializers]   [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."role" = $1[0m  [["role", 1]]
+[active_model_serializers]   ↳ app/controllers/pets_controller.rb:5:in `index'
+[active_model_serializers] Rendered ActiveModel::Serializer::CollectionSerializer with Array (1.79ms)
+Completed 200 OK in 6ms (Views: 3.2ms | ActiveRecord: 0.5ms | Allocations: 2423)
+
+
+Started GET "/pets_list" for ::1 at 2021-12-20 06:02:47 +0200
+Processing by PetsController#index as */*
+  Parameters: {"pet"=>{}}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/auth/authorize_api_request.rb:20:in `user'
+  [1m[36mPet Load (0.1ms)[0m  [1m[34mSELECT "pets".* FROM "pets" WHERE "pets"."user_id" = $1[0m  [["user_id", 2]]
+  ↳ app/controllers/pets_controller.rb:5:in `index'
+No serializer found for resource: #<Pet id: 1, name: "first pet", user_id: 2, created_at: "2021-12-20 03:45:17.934292000 +0000", updated_at: "2021-12-20 03:59:44.123236000 +0000", vet_id: 3>
+[active_model_serializers]   [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."role" = $1[0m  [["role", 1]]
+[active_model_serializers]   ↳ app/controllers/pets_controller.rb:5:in `index'
+[active_model_serializers] Rendered ActiveModel::Serializer::CollectionSerializer with Array (1.48ms)
+Completed 200 OK in 5ms (Views: 3.0ms | ActiveRecord: 0.4ms | Allocations: 2423)
+
+
+Started GET "/pets_list" for ::1 at 2021-12-20 06:04:08 +0200
+Processing by PetsController#index as */*
+  Parameters: {"pet"=>{}}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/auth/authorize_api_request.rb:20:in `user'
+  [1m[36mPet Load (0.2ms)[0m  [1m[34mSELECT "pets".* FROM "pets" WHERE "pets"."user_id" = $1[0m  [["user_id", 2]]
+  ↳ app/controllers/pets_controller.rb:5:in `index'
+No serializer found for resource: #<Pet id: 1, name: "first pet", user_id: 2, created_at: "2021-12-20 03:45:17.934292000 +0000", updated_at: "2021-12-20 03:59:44.123236000 +0000", vet_id: 3>
+[active_model_serializers]   [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."role" = $1[0m  [["role", 1]]
+[active_model_serializers]   ↳ app/controllers/pets_controller.rb:5:in `index'
+[active_model_serializers] Rendered ActiveModel::Serializer::CollectionSerializer with Array (1.71ms)
+Completed 200 OK in 6ms (Views: 3.2ms | ActiveRecord: 0.6ms | Allocations: 2423)
+
+
+Started GET "/pets_list" for ::1 at 2021-12-20 06:04:19 +0200
+Processing by PetsController#index as */*
+  Parameters: {"pet"=>{}}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/auth/authorize_api_request.rb:20:in `user'
+  [1m[36mPet Load (0.2ms)[0m  [1m[34mSELECT "pets".* FROM "pets" WHERE "pets"."user_id" = $1[0m  [["user_id", 2]]
+  ↳ app/controllers/pets_controller.rb:5:in `index'
+No serializer found for resource: #<Pet id: 1, name: "first pet", user_id: 2, created_at: "2021-12-20 03:45:17.934292000 +0000", updated_at: "2021-12-20 03:59:44.123236000 +0000", vet_id: 3>
+[active_model_serializers]   [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."role" = $1[0m  [["role", 1]]
+[active_model_serializers]   ↳ app/controllers/pets_controller.rb:5:in `index'
+[active_model_serializers] Rendered ActiveModel::Serializer::CollectionSerializer with Array (1.59ms)
+Completed 200 OK in 6ms (Views: 3.4ms | ActiveRecord: 0.6ms | Allocations: 2423)
+
+
+Started POST "/index" for ::1 at 2021-12-20 06:04:28 +0200
+Processing by ApplicationController#index as */*
+  Parameters: {"application"=>{}}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/auth/authorize_api_request.rb:20:in `user'
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:10:in `index'
+Completed 200 OK in 3ms (Views: 0.3ms | ActiveRecord: 0.2ms | Allocations: 988)
+
+
+Started POST "/pet_add" for ::1 at 2021-12-20 06:04:32 +0200
+Processing by PetsController#create as */*
+  Parameters: {"name"=>"test", "pet"=>{"name"=>"test"}}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/auth/authorize_api_request.rb:20:in `user'
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/pets_controller.rb:15:in `create'
+  [1m[36mPet Create (0.3ms)[0m  [1m[32mINSERT INTO "pets" ("name", "user_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["name", "test"], ["user_id", 2], ["created_at", "2021-12-20 04:04:32.313887"], ["updated_at", "2021-12-20 04:04:32.313887"]]
+  ↳ app/controllers/pets_controller.rb:15:in `create'
+  [1m[36mTRANSACTION (40.5ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/controllers/pets_controller.rb:15:in `create'
+Completed 201 Created in 46ms (Views: 0.1ms | ActiveRecord: 41.1ms | Allocations: 2238)
+
+
+Started POST "/index" for ::1 at 2021-12-20 06:04:32 +0200
+Processing by ApplicationController#index as */*
+  Parameters: {"application"=>{}}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/auth/authorize_api_request.rb:20:in `user'
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:10:in `index'
+Completed 200 OK in 2ms (Views: 0.2ms | ActiveRecord: 0.2ms | Allocations: 988)
+
+
+Started POST "/index" for ::1 at 2021-12-20 06:04:34 +0200
+Processing by ApplicationController#index as */*
+  Parameters: {"application"=>{}}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/auth/authorize_api_request.rb:20:in `user'
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:10:in `index'
+Completed 200 OK in 2ms (Views: 0.2ms | ActiveRecord: 0.2ms | Allocations: 988)
+
+
+Started GET "/pets_list" for ::1 at 2021-12-20 06:04:35 +0200
+Processing by PetsController#index as */*
+  Parameters: {"pet"=>{}}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/auth/authorize_api_request.rb:20:in `user'
+  [1m[36mPet Load (0.2ms)[0m  [1m[34mSELECT "pets".* FROM "pets" WHERE "pets"."user_id" = $1[0m  [["user_id", 2]]
+  ↳ app/controllers/pets_controller.rb:5:in `index'
+No serializer found for resource: #<Pet id: 1, name: "first pet", user_id: 2, created_at: "2021-12-20 03:45:17.934292000 +0000", updated_at: "2021-12-20 03:59:44.123236000 +0000", vet_id: 3>
+[active_model_serializers]   [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."role" = $1[0m  [["role", 1]]
+[active_model_serializers]   ↳ app/controllers/pets_controller.rb:5:in `index'
+[active_model_serializers] Rendered ActiveModel::Serializer::CollectionSerializer with Array (3.34ms)
+Completed 200 OK in 8ms (Views: 5.2ms | ActiveRecord: 0.7ms | Allocations: 2514)
+
+
+Started POST "/register" for ::1 at 2021-12-20 06:04:40 +0200
+Processing by PetsController#register as */*
+  Parameters: {"pet_id"=>"2", "vet_id"=>"3", "pet"=>{"vet_id"=>"3"}}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/auth/authorize_api_request.rb:20:in `user'
+  [1m[36mPet Load (0.2ms)[0m  [1m[34mSELECT "pets".* FROM "pets" WHERE "pets"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/pets_controller.rb:55:in `register'
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/pets_controller.rb:57:in `register'
+  [1m[36mPet Update (0.3ms)[0m  [1m[33mUPDATE "pets" SET "updated_at" = $1, "vet_id" = $2 WHERE "pets"."id" = $3[0m  [["updated_at", "2021-12-20 04:04:40.896312"], ["vet_id", 3], ["id", 2]]
+  ↳ app/controllers/pets_controller.rb:57:in `register'
+  [1m[36mTRANSACTION (0.8ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/controllers/pets_controller.rb:57:in `register'
+Completed 201 Created in 7ms (Views: 0.1ms | ActiveRecord: 1.6ms | Allocations: 2561)
+
+
+Started GET "/pets_list" for ::1 at 2021-12-20 06:04:42 +0200
+Processing by PetsController#index as */*
+  Parameters: {"pet"=>{}}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/auth/authorize_api_request.rb:20:in `user'
+  [1m[36mPet Load (0.2ms)[0m  [1m[34mSELECT "pets".* FROM "pets" WHERE "pets"."user_id" = $1[0m  [["user_id", 2]]
+  ↳ app/controllers/pets_controller.rb:5:in `index'
+No serializer found for resource: #<Pet id: 1, name: "first pet", user_id: 2, created_at: "2021-12-20 03:45:17.934292000 +0000", updated_at: "2021-12-20 03:59:44.123236000 +0000", vet_id: 3>
+[active_model_serializers]   [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."role" = $1[0m  [["role", 1]]
+[active_model_serializers]   ↳ app/controllers/pets_controller.rb:5:in `index'
+[active_model_serializers] Rendered ActiveModel::Serializer::CollectionSerializer with Array (1.97ms)
+Completed 200 OK in 6ms (Views: 3.7ms | ActiveRecord: 0.5ms | Allocations: 2514)
+
+
+Started POST "/appointment_create" for ::1 at 2021-12-20 06:04:56 +0200
+Processing by AppointmentsController#create as */*
+  Parameters: {"pet_id"=>"2", "vet_id"=>"3", "date"=>"2021-12-24", "appointment"=>{"pet_id"=>"2", "vet_id"=>"3", "date"=>"2021-12-24"}}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/auth/authorize_api_request.rb:20:in `user'
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/appointments_controller.rb:3:in `create'
+  [1m[36mAppointment Create (0.3ms)[0m  [1m[32mINSERT INTO "appointments" ("pet_id", "vet_id", "date", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["pet_id", 2], ["vet_id", 3], ["date", "2021-12-24 00:00:00"], ["created_at", "2021-12-20 04:04:56.827668"], ["updated_at", "2021-12-20 04:04:56.827668"]]
+  ↳ app/controllers/appointments_controller.rb:3:in `create'
+  [1m[36mTRANSACTION (0.8ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/controllers/appointments_controller.rb:3:in `create'
+Completed 201 Created in 7ms (Views: 0.1ms | ActiveRecord: 1.4ms | Allocations: 2266)
+
+
+Started GET "/pets_list" for ::1 at 2021-12-20 06:04:58 +0200
+Processing by PetsController#index as */*
+  Parameters: {"pet"=>{}}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/auth/authorize_api_request.rb:20:in `user'
+  [1m[36mPet Load (0.1ms)[0m  [1m[34mSELECT "pets".* FROM "pets" WHERE "pets"."user_id" = $1[0m  [["user_id", 2]]
+  ↳ app/controllers/pets_controller.rb:5:in `index'
+No serializer found for resource: #<Pet id: 1, name: "first pet", user_id: 2, created_at: "2021-12-20 03:45:17.934292000 +0000", updated_at: "2021-12-20 03:59:44.123236000 +0000", vet_id: 3>
+[active_model_serializers]   [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."role" = $1[0m  [["role", 1]]
+[active_model_serializers]   ↳ app/controllers/pets_controller.rb:5:in `index'
+[active_model_serializers] Rendered ActiveModel::Serializer::CollectionSerializer with Array (1.81ms)
+Completed 200 OK in 5ms (Views: 3.2ms | ActiveRecord: 0.4ms | Allocations: 2514)
+
+
+Started GET "/pet_show" for ::1 at 2021-12-20 06:04:59 +0200
+Processing by PetsController#show as */*
+  Parameters: {"id"=>"2", "pet"=>{"id"=>"2"}}
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/auth/authorize_api_request.rb:20:in `user'
+  [1m[36mPet Load (0.3ms)[0m  [1m[34mSELECT "pets".* FROM "pets" WHERE "pets"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/pets_controller.rb:23:in `show'
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/controllers/pets_controller.rb:27:in `show'
+No serializer found for resource: #<Pet id: 2, name: "test", user_id: 2, created_at: "2021-12-20 04:04:32.313887000 +0000", updated_at: "2021-12-20 04:04:40.896312000 +0000", vet_id: 3>
+[active_model_serializers]   [1m[36mAppointment Load (0.3ms)[0m  [1m[34mSELECT "appointments".* FROM "appointments" WHERE "appointments"."pet_id" = $1[0m  [["pet_id", 2]]
+[active_model_serializers]   ↳ app/controllers/pets_controller.rb:29:in `show'
+[active_model_serializers] Rendered ActiveModel::Serializer::CollectionSerializer with Array (2.08ms)
+Completed 200 OK in 13ms (Views: 2.5ms | ActiveRecord: 1.4ms | Allocations: 2570)
+
+
+Started POST "/vet_pets" for ::1 at 2021-12-20 06:05:06 +0200
+Processing by UsersController#vet_pets as */*
+  Parameters: {"user"=>{}}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/auth/authorize_api_request.rb:20:in `user'
+  [1m[36mPet Load (0.2ms)[0m  [1m[34mSELECT "pets".* FROM "pets" WHERE "pets"."vet_id" = $1[0m  [["vet_id", 3]]
+  ↳ app/controllers/users_controller.rb:12:in `vet_pets'
+No serializer found for resource: #<Pet id: 1, name: "first pet", user_id: 2, created_at: "2021-12-20 03:45:17.934292000 +0000", updated_at: "2021-12-20 03:59:44.123236000 +0000", vet_id: 3>
+[active_model_serializers] Rendered ActiveModel::Serializer::CollectionSerializer with Pet::ActiveRecord_Relation (0.25ms)
+Completed 200 OK in 4ms (Views: 1.9ms | ActiveRecord: 0.3ms | Allocations: 1606)
+
+
+Started POST "/vet_pet_appointment" for ::1 at 2021-12-20 06:05:07 +0200
+Processing by UsersController#vet_pet_appointment as */*
+  Parameters: {"pet_id"=>"2", "user"=>{}}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/auth/authorize_api_request.rb:20:in `user'
+  [1m[36mPet Load (0.2ms)[0m  [1m[34mSELECT "pets".* FROM "pets" WHERE "pets"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:21:in `vet_pet_appointment'
+No serializer found for resource: #<Pet id: 2, name: "test", user_id: 2, created_at: "2021-12-20 04:04:32.313887000 +0000", updated_at: "2021-12-20 04:04:40.896312000 +0000", vet_id: 3>
+[active_model_serializers]   [1m[36mAppointment Load (0.1ms)[0m  [1m[34mSELECT "appointments".* FROM "appointments" WHERE "appointments"."pet_id" = $1[0m  [["pet_id", 2]]
+[active_model_serializers]   ↳ app/controllers/users_controller.rb:23:in `vet_pet_appointment'
+[active_model_serializers] Rendered ActiveModel::Serializer::CollectionSerializer with Array (1.38ms)
+Completed 200 OK in 5ms (Views: 1.9ms | ActiveRecord: 0.5ms | Allocations: 2111)
+
+
+Started POST "/vet_pet_appointment" for ::1 at 2021-12-20 06:08:27 +0200
+Processing by UsersController#vet_pet_appointment as */*
+  Parameters: {"pet_id"=>"2", "user"=>{}}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/auth/authorize_api_request.rb:20:in `user'
+  [1m[36mPet Load (0.2ms)[0m  [1m[34mSELECT "pets".* FROM "pets" WHERE "pets"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:21:in `vet_pet_appointment'
+No serializer found for resource: #<Pet id: 2, name: "test", user_id: 2, created_at: "2021-12-20 04:04:32.313887000 +0000", updated_at: "2021-12-20 04:04:40.896312000 +0000", vet_id: 3>
+[active_model_serializers]   [1m[36mAppointment Load (0.1ms)[0m  [1m[34mSELECT "appointments".* FROM "appointments" WHERE "appointments"."pet_id" = $1[0m  [["pet_id", 2]]
+[active_model_serializers]   ↳ app/controllers/users_controller.rb:23:in `vet_pet_appointment'
+[active_model_serializers] Rendered ActiveModel::Serializer::CollectionSerializer with Array (1.61ms)
+Completed 200 OK in 5ms (Views: 2.1ms | ActiveRecord: 0.4ms | Allocations: 2111)
+
+
+Started POST "/index" for ::1 at 2021-12-20 06:09:35 +0200
+Processing by ApplicationController#index as */*
+  Parameters: {"application"=>{}}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/auth/authorize_api_request.rb:20:in `user'
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:10:in `index'
+Completed 200 OK in 3ms (Views: 0.2ms | ActiveRecord: 0.2ms | Allocations: 988)
+
+
+Started POST "/vet_pets" for ::1 at 2021-12-20 06:09:37 +0200
+Processing by UsersController#vet_pets as */*
+  Parameters: {"user"=>{}}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/auth/authorize_api_request.rb:20:in `user'
+  [1m[36mPet Load (0.2ms)[0m  [1m[34mSELECT "pets".* FROM "pets" WHERE "pets"."vet_id" = $1[0m  [["vet_id", 3]]
+  ↳ app/controllers/users_controller.rb:12:in `vet_pets'
+No serializer found for resource: #<Pet id: 1, name: "first pet", user_id: 2, created_at: "2021-12-20 03:45:17.934292000 +0000", updated_at: "2021-12-20 03:59:44.123236000 +0000", vet_id: 3>
+[active_model_serializers] Rendered ActiveModel::Serializer::CollectionSerializer with Pet::ActiveRecord_Relation (0.24ms)
+Completed 200 OK in 4ms (Views: 1.9ms | ActiveRecord: 0.4ms | Allocations: 1606)
+
+
+Started POST "/vet_appointments" for ::1 at 2021-12-20 06:09:39 +0200
+Processing by UsersController#vet_appointments as */*
+  Parameters: {"user"=>{}}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/auth/authorize_api_request.rb:20:in `user'
+  [1m[36mAppointment Load (0.1ms)[0m  [1m[34mSELECT "appointments".* FROM "appointments" WHERE "appointments"."vet_id" = $1[0m  [["vet_id", 3]]
+  ↳ app/controllers/users_controller.rb:17:in `vet_appointments'
+No serializer found for resource: #<Appointment id: 7, pet_id: 1, vet_id: 3, date: "2021-12-01 00:00:00.000000000 +0000", created_at: "2021-12-20 04:00:19.457348000 +0000", updated_at: "2021-12-20 04:00:19.457348000 +0000">
+[active_model_serializers] Rendered ActiveModel::Serializer::CollectionSerializer with Appointment::ActiveRecord_Relation (0.25ms)
+Completed 200 OK in 4ms (Views: 2.0ms | ActiveRecord: 0.3ms | Allocations: 1632)
+
+
+Started POST "/vet_pets" for ::1 at 2021-12-20 06:09:41 +0200
+Processing by UsersController#vet_pets as */*
+  Parameters: {"user"=>{}}
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/auth/authorize_api_request.rb:20:in `user'
+  [1m[36mPet Load (0.2ms)[0m  [1m[34mSELECT "pets".* FROM "pets" WHERE "pets"."vet_id" = $1[0m  [["vet_id", 3]]
+  ↳ app/controllers/users_controller.rb:12:in `vet_pets'
+No serializer found for resource: #<Pet id: 1, name: "first pet", user_id: 2, created_at: "2021-12-20 03:45:17.934292000 +0000", updated_at: "2021-12-20 03:59:44.123236000 +0000", vet_id: 3>
+[active_model_serializers] Rendered ActiveModel::Serializer::CollectionSerializer with Pet::ActiveRecord_Relation (0.32ms)
+Completed 200 OK in 5ms (Views: 2.3ms | ActiveRecord: 0.5ms | Allocations: 1606)
+
+
+Started POST "/vet_pet_appointment" for ::1 at 2021-12-20 06:09:42 +0200
+Processing by UsersController#vet_pet_appointment as */*
+  Parameters: {"pet_id"=>"1", "user"=>{}}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/auth/authorize_api_request.rb:20:in `user'
+  [1m[36mPet Load (0.1ms)[0m  [1m[34mSELECT "pets".* FROM "pets" WHERE "pets"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:21:in `vet_pet_appointment'
+No serializer found for resource: #<Pet id: 1, name: "first pet", user_id: 2, created_at: "2021-12-20 03:45:17.934292000 +0000", updated_at: "2021-12-20 03:59:44.123236000 +0000", vet_id: 3>
+[active_model_serializers]   [1m[36mAppointment Load (0.1ms)[0m  [1m[34mSELECT "appointments".* FROM "appointments" WHERE "appointments"."pet_id" = $1[0m  [["pet_id", 1]]
+[active_model_serializers]   ↳ app/controllers/users_controller.rb:23:in `vet_pet_appointment'
+[active_model_serializers] Rendered ActiveModel::Serializer::CollectionSerializer with Array (2.44ms)
+Completed 200 OK in 6ms (Views: 3.0ms | ActiveRecord: 0.4ms | Allocations: 2718)
+
+
+Started POST "/vet_pets" for ::1 at 2021-12-20 06:10:14 +0200
+Processing by UsersController#vet_pets as */*
+  Parameters: {"user"=>{}}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/auth/authorize_api_request.rb:20:in `user'
+  [1m[36mPet Load (0.2ms)[0m  [1m[34mSELECT "pets".* FROM "pets" WHERE "pets"."vet_id" = $1[0m  [["vet_id", 3]]
+  ↳ app/controllers/users_controller.rb:12:in `vet_pets'
+No serializer found for resource: #<Pet id: 1, name: "first pet", user_id: 2, created_at: "2021-12-20 03:45:17.934292000 +0000", updated_at: "2021-12-20 03:59:44.123236000 +0000", vet_id: 3>
+[active_model_serializers] Rendered ActiveModel::Serializer::CollectionSerializer with Pet::ActiveRecord_Relation (0.26ms)
+Completed 200 OK in 4ms (Views: 2.1ms | ActiveRecord: 0.3ms | Allocations: 1606)
+
+
+Started POST "/vet_pet_appointment" for ::1 at 2021-12-20 06:10:16 +0200
+Processing by UsersController#vet_pet_appointment as */*
+  Parameters: {"pet_id"=>"2", "user"=>{}}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/auth/authorize_api_request.rb:20:in `user'
+  [1m[36mPet Load (0.2ms)[0m  [1m[34mSELECT "pets".* FROM "pets" WHERE "pets"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:21:in `vet_pet_appointment'
+No serializer found for resource: #<Pet id: 2, name: "test", user_id: 2, created_at: "2021-12-20 04:04:32.313887000 +0000", updated_at: "2021-12-20 04:04:40.896312000 +0000", vet_id: 3>
+[active_model_serializers]   [1m[36mAppointment Load (0.2ms)[0m  [1m[34mSELECT "appointments".* FROM "appointments" WHERE "appointments"."pet_id" = $1[0m  [["pet_id", 2]]
+[active_model_serializers]   ↳ app/controllers/users_controller.rb:23:in `vet_pet_appointment'
+[active_model_serializers] Rendered ActiveModel::Serializer::CollectionSerializer with Array (1.62ms)
+Completed 200 OK in 5ms (Views: 2.3ms | ActiveRecord: 0.5ms | Allocations: 2111)
+
+
+Started POST "/vet_pet_appointment" for ::1 at 2021-12-20 06:10:20 +0200
+Processing by UsersController#vet_pet_appointment as */*
+  Parameters: {"pet_id"=>"2", "user"=>{}}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/auth/authorize_api_request.rb:20:in `user'
+  [1m[36mPet Load (0.2ms)[0m  [1m[34mSELECT "pets".* FROM "pets" WHERE "pets"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:21:in `vet_pet_appointment'
+No serializer found for resource: #<Pet id: 2, name: "test", user_id: 2, created_at: "2021-12-20 04:04:32.313887000 +0000", updated_at: "2021-12-20 04:04:40.896312000 +0000", vet_id: 3>
+[active_model_serializers]   [1m[36mAppointment Load (0.2ms)[0m  [1m[34mSELECT "appointments".* FROM "appointments" WHERE "appointments"."pet_id" = $1[0m  [["pet_id", 2]]
+[active_model_serializers]   ↳ app/controllers/users_controller.rb:23:in `vet_pet_appointment'
+[active_model_serializers] Rendered ActiveModel::Serializer::CollectionSerializer with Array (1.92ms)
+Completed 200 OK in 6ms (Views: 2.5ms | ActiveRecord: 0.5ms | Allocations: 2111)
+
+
+Started POST "/vet_pet_appointment" for ::1 at 2021-12-20 06:11:27 +0200
+Processing by UsersController#vet_pet_appointment as */*
+  Parameters: {"pet_id"=>"2", "user"=>{}}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/auth/authorize_api_request.rb:20:in `user'
+  [1m[36mPet Load (0.2ms)[0m  [1m[34mSELECT "pets".* FROM "pets" WHERE "pets"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:21:in `vet_pet_appointment'
+No serializer found for resource: #<Pet id: 2, name: "test", user_id: 2, created_at: "2021-12-20 04:04:32.313887000 +0000", updated_at: "2021-12-20 04:04:40.896312000 +0000", vet_id: 3>
+[active_model_serializers]   [1m[36mAppointment Load (0.1ms)[0m  [1m[34mSELECT "appointments".* FROM "appointments" WHERE "appointments"."pet_id" = $1[0m  [["pet_id", 2]]
+[active_model_serializers]   ↳ app/controllers/users_controller.rb:23:in `vet_pet_appointment'
+[active_model_serializers] Rendered ActiveModel::Serializer::CollectionSerializer with Array (1.62ms)
+Completed 200 OK in 5ms (Views: 2.1ms | ActiveRecord: 0.5ms | Allocations: 2111)
+
+
+Started POST "/vet_pet_appointment" for ::1 at 2021-12-20 06:11:42 +0200
+Processing by UsersController#vet_pet_appointment as */*
+  Parameters: {"pet_id"=>"2", "user"=>{}}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/auth/authorize_api_request.rb:20:in `user'
+  [1m[36mPet Load (0.2ms)[0m  [1m[34mSELECT "pets".* FROM "pets" WHERE "pets"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:21:in `vet_pet_appointment'
+No serializer found for resource: #<Pet id: 2, name: "test", user_id: 2, created_at: "2021-12-20 04:04:32.313887000 +0000", updated_at: "2021-12-20 04:04:40.896312000 +0000", vet_id: 3>
+[active_model_serializers]   [1m[36mAppointment Load (0.1ms)[0m  [1m[34mSELECT "appointments".* FROM "appointments" WHERE "appointments"."pet_id" = $1[0m  [["pet_id", 2]]
+[active_model_serializers]   ↳ app/controllers/users_controller.rb:23:in `vet_pet_appointment'
+[active_model_serializers] Rendered ActiveModel::Serializer::CollectionSerializer with Array (1.41ms)
+Completed 200 OK in 6ms (Views: 1.9ms | ActiveRecord: 0.6ms | Allocations: 2111)
+
+
+Started POST "/vet_pet_appointment" for ::1 at 2021-12-20 06:11:52 +0200
+Processing by UsersController#vet_pet_appointment as */*
+  Parameters: {"pet_id"=>"2", "user"=>{}}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/auth/authorize_api_request.rb:20:in `user'
+  [1m[36mPet Load (0.2ms)[0m  [1m[34mSELECT "pets".* FROM "pets" WHERE "pets"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:21:in `vet_pet_appointment'
+No serializer found for resource: #<Pet id: 2, name: "test", user_id: 2, created_at: "2021-12-20 04:04:32.313887000 +0000", updated_at: "2021-12-20 04:04:40.896312000 +0000", vet_id: 3>
+[active_model_serializers]   [1m[36mAppointment Load (0.1ms)[0m  [1m[34mSELECT "appointments".* FROM "appointments" WHERE "appointments"."pet_id" = $1[0m  [["pet_id", 2]]
+[active_model_serializers]   ↳ app/controllers/users_controller.rb:23:in `vet_pet_appointment'
+[active_model_serializers] Rendered ActiveModel::Serializer::CollectionSerializer with Array (1.66ms)
+Completed 200 OK in 6ms (Views: 2.4ms | ActiveRecord: 0.5ms | Allocations: 2111)
+
+
+Started POST "/vet_pet_appointment" for ::1 at 2021-12-20 06:24:52 +0200
+Processing by UsersController#vet_pet_appointment as */*
+  Parameters: {"pet_id"=>"2", "user"=>{}}
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/auth/authorize_api_request.rb:20:in `user'
+  [1m[36mPet Load (0.6ms)[0m  [1m[34mSELECT "pets".* FROM "pets" WHERE "pets"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:21:in `vet_pet_appointment'
+No serializer found for resource: #<Pet id: 2, name: "test", user_id: 2, created_at: "2021-12-20 04:04:32.313887000 +0000", updated_at: "2021-12-20 04:04:40.896312000 +0000", vet_id: 3>
+[active_model_serializers]   [1m[36mAppointment Load (0.4ms)[0m  [1m[34mSELECT "appointments".* FROM "appointments" WHERE "appointments"."pet_id" = $1[0m  [["pet_id", 2]]
+[active_model_serializers]   ↳ app/controllers/users_controller.rb:23:in `vet_pet_appointment'
+[active_model_serializers] Rendered ActiveModel::Serializer::CollectionSerializer with Array (6.16ms)
+Completed 200 OK in 25ms (Views: 7.2ms | ActiveRecord: 49.0ms | Allocations: 11261)
+
+
+Started POST "/vet_pet_appointment" for ::1 at 2021-12-20 06:25:37 +0200
+Processing by UsersController#vet_pet_appointment as */*
+  Parameters: {"pet_id"=>"2", "user"=>{}}
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/auth/authorize_api_request.rb:20:in `user'
+  [1m[36mPet Load (0.2ms)[0m  [1m[34mSELECT "pets".* FROM "pets" WHERE "pets"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:21:in `vet_pet_appointment'
+No serializer found for resource: #<Pet id: 2, name: "test", user_id: 2, created_at: "2021-12-20 04:04:32.313887000 +0000", updated_at: "2021-12-20 04:04:40.896312000 +0000", vet_id: 3>
+[active_model_serializers]   [1m[36mAppointment Load (0.2ms)[0m  [1m[34mSELECT "appointments".* FROM "appointments" WHERE "appointments"."pet_id" = $1[0m  [["pet_id", 2]]
+[active_model_serializers]   ↳ app/controllers/users_controller.rb:23:in `vet_pet_appointment'
+[active_model_serializers] Rendered ActiveModel::Serializer::CollectionSerializer with Array (8.21ms)
+Completed 200 OK in 37ms (Views: 7.6ms | ActiveRecord: 12.7ms | Allocations: 11563)
+
+
+Started POST "/vet_pet_appointment" for ::1 at 2021-12-20 06:27:10 +0200
+Processing by UsersController#vet_pet_appointment as */*
+  Parameters: {"pet_id"=>"2", "user"=>{}}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/auth/authorize_api_request.rb:20:in `user'
+  [1m[36mPet Load (0.2ms)[0m  [1m[34mSELECT "pets".* FROM "pets" WHERE "pets"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:21:in `vet_pet_appointment'
+No serializer found for resource: #<Pet id: 2, name: "test", user_id: 2, created_at: "2021-12-20 04:04:32.313887000 +0000", updated_at: "2021-12-20 04:04:40.896312000 +0000", vet_id: 3>
+[active_model_serializers]   [1m[36mAppointment Load (0.2ms)[0m  [1m[34mSELECT "appointments".* FROM "appointments" WHERE "appointments"."pet_id" = $1[0m  [["pet_id", 2]]
+[active_model_serializers]   ↳ app/controllers/users_controller.rb:23:in `vet_pet_appointment'
+[active_model_serializers] Rendered ActiveModel::Serializer::CollectionSerializer with Array (1.96ms)
+Completed 200 OK in 6ms (Views: 2.5ms | ActiveRecord: 0.7ms | Allocations: 2114)
+
+
+Started POST "/vet_pet_appointment" for ::1 at 2021-12-20 06:27:11 +0200
+Processing by UsersController#vet_pet_appointment as */*
+  Parameters: {"pet_id"=>nil, "user"=>{}}
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/auth/authorize_api_request.rb:20:in `user'
+[active_model_serializers] Rendered ActiveModel::Serializer::Null with Hash (0.06ms)
+Completed 404 Not Found in 2ms (Views: 0.5ms | ActiveRecord: 0.3ms | Allocations: 878)
+
+
+Started POST "/vet_pet_appointment" for ::1 at 2021-12-20 06:27:11 +0200
+Processing by UsersController#vet_pet_appointment as */*
+  Parameters: {"pet_id"=>nil, "user"=>{}}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/auth/authorize_api_request.rb:20:in `user'
+[active_model_serializers] Rendered ActiveModel::Serializer::Null with Hash (0.06ms)
+Completed 404 Not Found in 2ms (Views: 0.3ms | ActiveRecord: 0.2ms | Allocations: 815)
+
+
+Started POST "/vet_pet_appointment" for ::1 at 2021-12-20 06:27:30 +0200
+Processing by UsersController#vet_pet_appointment as */*
+  Parameters: {"pet_id"=>"2", "user"=>{}}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/auth/authorize_api_request.rb:20:in `user'
+  [1m[36mPet Load (0.2ms)[0m  [1m[34mSELECT "pets".* FROM "pets" WHERE "pets"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:21:in `vet_pet_appointment'
+No serializer found for resource: #<Pet id: 2, name: "test", user_id: 2, created_at: "2021-12-20 04:04:32.313887000 +0000", updated_at: "2021-12-20 04:04:40.896312000 +0000", vet_id: 3>
+[active_model_serializers]   [1m[36mAppointment Load (0.2ms)[0m  [1m[34mSELECT "appointments".* FROM "appointments" WHERE "appointments"."pet_id" = $1[0m  [["pet_id", 2]]
+[active_model_serializers]   ↳ app/controllers/users_controller.rb:23:in `vet_pet_appointment'
+[active_model_serializers] Rendered ActiveModel::Serializer::CollectionSerializer with Array (1.76ms)
+Completed 200 OK in 5ms (Views: 2.2ms | ActiveRecord: 0.7ms | Allocations: 2111)
+
+
+Started POST "/vet_pet_appointment" for ::1 at 2021-12-20 06:27:48 +0200
+Processing by UsersController#vet_pet_appointment as */*
+  Parameters: {"pet_id"=>"2", "user"=>{}}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/auth/authorize_api_request.rb:20:in `user'
+  [1m[36mPet Load (0.4ms)[0m  [1m[34mSELECT "pets".* FROM "pets" WHERE "pets"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:21:in `vet_pet_appointment'
+No serializer found for resource: #<Pet id: 2, name: "test", user_id: 2, created_at: "2021-12-20 04:04:32.313887000 +0000", updated_at: "2021-12-20 04:04:40.896312000 +0000", vet_id: 3>
+[active_model_serializers]   [1m[36mAppointment Load (0.2ms)[0m  [1m[34mSELECT "appointments".* FROM "appointments" WHERE "appointments"."pet_id" = $1[0m  [["pet_id", 2]]
+[active_model_serializers]   ↳ app/controllers/users_controller.rb:23:in `vet_pet_appointment'
+[active_model_serializers] Rendered ActiveModel::Serializer::CollectionSerializer with Array (1.82ms)
+Completed 200 OK in 6ms (Views: 2.3ms | ActiveRecord: 0.8ms | Allocations: 2111)
+
+
+Started POST "/vet_registration" for ::1 at 2021-12-20 06:27:48 +0200
+Processing by UsersController#vet_registration as */*
+  Parameters: {"user"=>{}}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/auth/authorize_api_request.rb:20:in `user'
+Completed 200 OK in 2ms (Views: 0.3ms | ActiveRecord: 0.2ms | Allocations: 736)
+
+
+Started POST "/vet_pet_appointment" for ::1 at 2021-12-20 06:27:48 +0200
+Processing by UsersController#vet_pet_appointment as */*
+  Parameters: {"pet_id"=>nil, "user"=>{}}
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/auth/authorize_api_request.rb:20:in `user'
+[active_model_serializers] Rendered ActiveModel::Serializer::Null with Hash (0.06ms)
+Completed 404 Not Found in 2ms (Views: 0.3ms | ActiveRecord: 0.1ms | Allocations: 815)
+
+
+Started POST "/vet_pet_appointment" for ::1 at 2021-12-20 06:28:34 +0200
+Processing by UsersController#vet_pet_appointment as */*
+  Parameters: {"pet_id"=>"2", "user"=>{}}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/auth/authorize_api_request.rb:20:in `user'
+  [1m[36mPet Load (0.2ms)[0m  [1m[34mSELECT "pets".* FROM "pets" WHERE "pets"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:21:in `vet_pet_appointment'
+No serializer found for resource: #<Pet id: 2, name: "test", user_id: 2, created_at: "2021-12-20 04:04:32.313887000 +0000", updated_at: "2021-12-20 04:04:40.896312000 +0000", vet_id: 3>
+[active_model_serializers]   [1m[36mAppointment Load (0.2ms)[0m  [1m[34mSELECT "appointments".* FROM "appointments" WHERE "appointments"."pet_id" = $1[0m  [["pet_id", 2]]
+[active_model_serializers]   ↳ app/controllers/users_controller.rb:23:in `vet_pet_appointment'
+[active_model_serializers] Rendered ActiveModel::Serializer::CollectionSerializer with Array (1.49ms)
+Completed 200 OK in 6ms (Views: 2.0ms | ActiveRecord: 0.6ms | Allocations: 2111)
+
+
+Started POST "/vet_registration" for ::1 at 2021-12-20 06:28:35 +0200
+Processing by UsersController#vet_registration as */*
+  Parameters: {"user"=>{}}
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/auth/authorize_api_request.rb:20:in `user'
+Completed 200 OK in 2ms (Views: 0.2ms | ActiveRecord: 0.1ms | Allocations: 695)
+
+
+Started POST "/vet_pet_appointment" for ::1 at 2021-12-20 06:28:35 +0200
+Processing by UsersController#vet_pet_appointment as */*
+  Parameters: {"pet_id"=>nil, "user"=>{}}
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/auth/authorize_api_request.rb:20:in `user'
+[active_model_serializers] Rendered ActiveModel::Serializer::Null with Hash (0.06ms)
+Completed 404 Not Found in 2ms (Views: 0.4ms | ActiveRecord: 0.1ms | Allocations: 815)
+
+
+Started POST "/vet_pet_appointment" for ::1 at 2021-12-20 06:28:44 +0200
+Processing by UsersController#vet_pet_appointment as */*
+  Parameters: {"pet_id"=>"2", "user"=>{}}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/auth/authorize_api_request.rb:20:in `user'
+  [1m[36mPet Load (0.1ms)[0m  [1m[34mSELECT "pets".* FROM "pets" WHERE "pets"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:21:in `vet_pet_appointment'
+No serializer found for resource: #<Pet id: 2, name: "test", user_id: 2, created_at: "2021-12-20 04:04:32.313887000 +0000", updated_at: "2021-12-20 04:04:40.896312000 +0000", vet_id: 3>
+[active_model_serializers]   [1m[36mAppointment Load (0.1ms)[0m  [1m[34mSELECT "appointments".* FROM "appointments" WHERE "appointments"."pet_id" = $1[0m  [["pet_id", 2]]
+[active_model_serializers]   ↳ app/controllers/users_controller.rb:23:in `vet_pet_appointment'
+[active_model_serializers] Rendered ActiveModel::Serializer::CollectionSerializer with Array (1.3ms)
+Completed 200 OK in 5ms (Views: 1.8ms | ActiveRecord: 0.5ms | Allocations: 2111)
+
+
+Started POST "/vet_registration" for ::1 at 2021-12-20 06:28:45 +0200
+Processing by UsersController#vet_registration as */*
+  Parameters: {"user"=>{}}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/auth/authorize_api_request.rb:20:in `user'
+Completed 200 OK in 2ms (Views: 0.2ms | ActiveRecord: 0.2ms | Allocations: 695)
+
+
+Started POST "/vet_pet_appointment" for ::1 at 2021-12-20 06:28:45 +0200
+Processing by UsersController#vet_pet_appointment as */*
+  Parameters: {"pet_id"=>nil, "user"=>{}}
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/auth/authorize_api_request.rb:20:in `user'
+[active_model_serializers] Rendered ActiveModel::Serializer::Null with Hash (0.06ms)
+Completed 404 Not Found in 2ms (Views: 0.5ms | ActiveRecord: 0.1ms | Allocations: 815)
+
+
+Started POST "/vet_pet_appointment" for ::1 at 2021-12-20 06:29:02 +0200
+Processing by UsersController#vet_pet_appointment as */*
+  Parameters: {"pet_id"=>nil, "user"=>{}}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/auth/authorize_api_request.rb:20:in `user'
+[active_model_serializers] Rendered ActiveModel::Serializer::Null with Hash (0.06ms)
+Completed 404 Not Found in 2ms (Views: 0.4ms | ActiveRecord: 0.2ms | Allocations: 815)
+
+
+Started POST "/vet_pet_appointment" for ::1 at 2021-12-20 06:29:03 +0200
+Processing by UsersController#vet_pet_appointment as */*
+  Parameters: {"pet_id"=>"2", "user"=>{}}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/auth/authorize_api_request.rb:20:in `user'
+  [1m[36mPet Load (0.1ms)[0m  [1m[34mSELECT "pets".* FROM "pets" WHERE "pets"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:21:in `vet_pet_appointment'
+No serializer found for resource: #<Pet id: 2, name: "test", user_id: 2, created_at: "2021-12-20 04:04:32.313887000 +0000", updated_at: "2021-12-20 04:04:40.896312000 +0000", vet_id: 3>
+[active_model_serializers]   [1m[36mAppointment Load (0.1ms)[0m  [1m[34mSELECT "appointments".* FROM "appointments" WHERE "appointments"."pet_id" = $1[0m  [["pet_id", 2]]
+[active_model_serializers]   ↳ app/controllers/users_controller.rb:23:in `vet_pet_appointment'
+[active_model_serializers] Rendered ActiveModel::Serializer::CollectionSerializer with Array (1.31ms)
+Completed 200 OK in 5ms (Views: 1.8ms | ActiveRecord: 0.4ms | Allocations: 2111)
+
+
+Started POST "/vet_registration" for ::1 at 2021-12-20 06:29:04 +0200
+Processing by UsersController#vet_registration as */*
+  Parameters: {"user"=>{}}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/auth/authorize_api_request.rb:20:in `user'
+Completed 200 OK in 2ms (Views: 0.2ms | ActiveRecord: 0.2ms | Allocations: 695)
+
+
+Started POST "/vet_pet_appointment" for ::1 at 2021-12-20 06:29:04 +0200
+Processing by UsersController#vet_pet_appointment as */*
+  Parameters: {"pet_id"=>"1", "user"=>{}}
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/auth/authorize_api_request.rb:20:in `user'
+  [1m[36mPet Load (0.5ms)[0m  [1m[34mSELECT "pets".* FROM "pets" WHERE "pets"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:21:in `vet_pet_appointment'
+No serializer found for resource: #<Pet id: 1, name: "first pet", user_id: 2, created_at: "2021-12-20 03:45:17.934292000 +0000", updated_at: "2021-12-20 03:59:44.123236000 +0000", vet_id: 3>
+[active_model_serializers]   [1m[36mAppointment Load (0.2ms)[0m  [1m[34mSELECT "appointments".* FROM "appointments" WHERE "appointments"."pet_id" = $1[0m  [["pet_id", 1]]
+[active_model_serializers]   ↳ app/controllers/users_controller.rb:23:in `vet_pet_appointment'
+[active_model_serializers] Rendered ActiveModel::Serializer::CollectionSerializer with Array (2.52ms)
+Completed 200 OK in 7ms (Views: 3.0ms | ActiveRecord: 0.8ms | Allocations: 2718)
+
+
+Started POST "/vet_pet_appointment" for ::1 at 2021-12-20 06:29:05 +0200
+Processing by UsersController#vet_pet_appointment as */*
+  Parameters: {"pet_id"=>"1", "user"=>{}}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/auth/authorize_api_request.rb:20:in `user'
+  [1m[36mPet Load (0.1ms)[0m  [1m[34mSELECT "pets".* FROM "pets" WHERE "pets"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:21:in `vet_pet_appointment'
+No serializer found for resource: #<Pet id: 1, name: "first pet", user_id: 2, created_at: "2021-12-20 03:45:17.934292000 +0000", updated_at: "2021-12-20 03:59:44.123236000 +0000", vet_id: 3>
+[active_model_serializers]   [1m[36mAppointment Load (0.1ms)[0m  [1m[34mSELECT "appointments".* FROM "appointments" WHERE "appointments"."pet_id" = $1[0m  [["pet_id", 1]]
+[active_model_serializers]   ↳ app/controllers/users_controller.rb:23:in `vet_pet_appointment'
+[active_model_serializers] Rendered ActiveModel::Serializer::CollectionSerializer with Array (2.29ms)
+Completed 200 OK in 6ms (Views: 2.7ms | ActiveRecord: 0.4ms | Allocations: 2718)
+
+
+Started POST "/vet_pet_appointment" for ::1 at 2021-12-20 06:29:07 +0200
+Processing by UsersController#vet_pet_appointment as */*
+  Parameters: {"pet_id"=>"2", "user"=>{}}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/auth/authorize_api_request.rb:20:in `user'
+  [1m[36mPet Load (0.1ms)[0m  [1m[34mSELECT "pets".* FROM "pets" WHERE "pets"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:21:in `vet_pet_appointment'
+No serializer found for resource: #<Pet id: 2, name: "test", user_id: 2, created_at: "2021-12-20 04:04:32.313887000 +0000", updated_at: "2021-12-20 04:04:40.896312000 +0000", vet_id: 3>
+[active_model_serializers]   [1m[36mAppointment Load (0.1ms)[0m  [1m[34mSELECT "appointments".* FROM "appointments" WHERE "appointments"."pet_id" = $1[0m  [["pet_id", 2]]
+[active_model_serializers]   ↳ app/controllers/users_controller.rb:23:in `vet_pet_appointment'
+[active_model_serializers] Rendered ActiveModel::Serializer::CollectionSerializer with Array (1.53ms)
+Completed 200 OK in 5ms (Views: 2.0ms | ActiveRecord: 0.4ms | Allocations: 2111)
+
+
+Started POST "/vet_registration" for ::1 at 2021-12-20 06:29:08 +0200
+Processing by UsersController#vet_registration as */*
+  Parameters: {"user"=>{}}
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/auth/authorize_api_request.rb:20:in `user'
+Completed 200 OK in 2ms (Views: 0.2ms | ActiveRecord: 0.1ms | Allocations: 695)
+
+
+Started POST "/vet_pet_appointment" for ::1 at 2021-12-20 06:29:08 +0200
+Processing by UsersController#vet_pet_appointment as */*
+  Parameters: {"pet_id"=>"1", "user"=>{}}
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/auth/authorize_api_request.rb:20:in `user'
+  [1m[36mPet Load (0.1ms)[0m  [1m[34mSELECT "pets".* FROM "pets" WHERE "pets"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:21:in `vet_pet_appointment'
+No serializer found for resource: #<Pet id: 1, name: "first pet", user_id: 2, created_at: "2021-12-20 03:45:17.934292000 +0000", updated_at: "2021-12-20 03:59:44.123236000 +0000", vet_id: 3>
+[active_model_serializers]   [1m[36mAppointment Load (0.2ms)[0m  [1m[34mSELECT "appointments".* FROM "appointments" WHERE "appointments"."pet_id" = $1[0m  [["pet_id", 1]]
+[active_model_serializers]   ↳ app/controllers/users_controller.rb:23:in `vet_pet_appointment'
+[active_model_serializers] Rendered ActiveModel::Serializer::CollectionSerializer with Array (3.2ms)
+Completed 200 OK in 7ms (Views: 3.8ms | ActiveRecord: 0.5ms | Allocations: 2718)
+
+
+Started POST "/vet_registration" for ::1 at 2021-12-20 06:29:12 +0200
+Processing by UsersController#vet_registration as */*
+  Parameters: {"user"=>{}}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/auth/authorize_api_request.rb:20:in `user'
+Completed 200 OK in 2ms (Views: 0.2ms | ActiveRecord: 0.2ms | Allocations: 695)
+
+
+Started POST "/vet_pet_appointment" for ::1 at 2021-12-20 06:29:12 +0200
+Processing by UsersController#vet_pet_appointment as */*
+  Parameters: {"pet_id"=>"1", "user"=>{}}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/auth/authorize_api_request.rb:20:in `user'
+  [1m[36mPet Load (0.2ms)[0m  [1m[34mSELECT "pets".* FROM "pets" WHERE "pets"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:21:in `vet_pet_appointment'
+No serializer found for resource: #<Pet id: 1, name: "first pet", user_id: 2, created_at: "2021-12-20 03:45:17.934292000 +0000", updated_at: "2021-12-20 03:59:44.123236000 +0000", vet_id: 3>
+[active_model_serializers]   [1m[36mAppointment Load (0.6ms)[0m  [1m[34mSELECT "appointments".* FROM "appointments" WHERE "appointments"."pet_id" = $1[0m  [["pet_id", 1]]
+[active_model_serializers]   ↳ app/controllers/users_controller.rb:23:in `vet_pet_appointment'
+[active_model_serializers] Rendered ActiveModel::Serializer::CollectionSerializer with Array (3.39ms)
+Completed 200 OK in 8ms (Views: 3.8ms | ActiveRecord: 1.0ms | Allocations: 2718)
+
+
+Started POST "/vet_registration" for ::1 at 2021-12-20 06:29:13 +0200
+Processing by UsersController#vet_registration as */*
+  Parameters: {"user"=>{}}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/auth/authorize_api_request.rb:20:in `user'
+Completed 200 OK in 2ms (Views: 0.2ms | ActiveRecord: 0.2ms | Allocations: 695)
+
+
+Started POST "/vet_pet_appointment" for ::1 at 2021-12-20 06:29:13 +0200
+Processing by UsersController#vet_pet_appointment as */*
+  Parameters: {"pet_id"=>"1", "user"=>{}}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/auth/authorize_api_request.rb:20:in `user'
+  [1m[36mPet Load (0.2ms)[0m  [1m[34mSELECT "pets".* FROM "pets" WHERE "pets"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:21:in `vet_pet_appointment'
+No serializer found for resource: #<Pet id: 1, name: "first pet", user_id: 2, created_at: "2021-12-20 03:45:17.934292000 +0000", updated_at: "2021-12-20 03:59:44.123236000 +0000", vet_id: 3>
+[active_model_serializers]   [1m[36mAppointment Load (0.1ms)[0m  [1m[34mSELECT "appointments".* FROM "appointments" WHERE "appointments"."pet_id" = $1[0m  [["pet_id", 1]]
+[active_model_serializers]   ↳ app/controllers/users_controller.rb:23:in `vet_pet_appointment'
+[active_model_serializers] Rendered ActiveModel::Serializer::CollectionSerializer with Array (2.37ms)
+Completed 200 OK in 7ms (Views: 2.9ms | ActiveRecord: 0.5ms | Allocations: 2718)
+
+
+Started POST "/vet_registration" for ::1 at 2021-12-20 06:29:14 +0200
+Processing by UsersController#vet_registration as */*
+  Parameters: {"user"=>{}}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/auth/authorize_api_request.rb:20:in `user'
+Completed 200 OK in 2ms (Views: 0.2ms | ActiveRecord: 0.2ms | Allocations: 695)
+
+
+Started POST "/vet_pet_appointment" for ::1 at 2021-12-20 06:29:14 +0200
+Processing by UsersController#vet_pet_appointment as */*
+  Parameters: {"pet_id"=>"1", "user"=>{}}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/auth/authorize_api_request.rb:20:in `user'
+  [1m[36mPet Load (0.1ms)[0m  [1m[34mSELECT "pets".* FROM "pets" WHERE "pets"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:21:in `vet_pet_appointment'
+No serializer found for resource: #<Pet id: 1, name: "first pet", user_id: 2, created_at: "2021-12-20 03:45:17.934292000 +0000", updated_at: "2021-12-20 03:59:44.123236000 +0000", vet_id: 3>
+[active_model_serializers]   [1m[36mAppointment Load (0.1ms)[0m  [1m[34mSELECT "appointments".* FROM "appointments" WHERE "appointments"."pet_id" = $1[0m  [["pet_id", 1]]
+[active_model_serializers]   ↳ app/controllers/users_controller.rb:23:in `vet_pet_appointment'
+[active_model_serializers] Rendered ActiveModel::Serializer::CollectionSerializer with Array (6.82ms)
+Completed 200 OK in 10ms (Views: 7.3ms | ActiveRecord: 0.4ms | Allocations: 2719)
+
+
+Started POST "/vet_registration" for ::1 at 2021-12-20 06:29:15 +0200
+Processing by UsersController#vet_registration as */*
+  Parameters: {"user"=>{}}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/auth/authorize_api_request.rb:20:in `user'
+Completed 200 OK in 3ms (Views: 0.2ms | ActiveRecord: 0.2ms | Allocations: 695)
+
+
+Started POST "/vet_pet_appointment" for ::1 at 2021-12-20 06:29:16 +0200
+Processing by UsersController#vet_pet_appointment as */*
+  Parameters: {"pet_id"=>"1", "user"=>{}}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/auth/authorize_api_request.rb:20:in `user'
+  [1m[36mPet Load (0.2ms)[0m  [1m[34mSELECT "pets".* FROM "pets" WHERE "pets"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:21:in `vet_pet_appointment'
+No serializer found for resource: #<Pet id: 1, name: "first pet", user_id: 2, created_at: "2021-12-20 03:45:17.934292000 +0000", updated_at: "2021-12-20 03:59:44.123236000 +0000", vet_id: 3>
+[active_model_serializers]   [1m[36mAppointment Load (0.2ms)[0m  [1m[34mSELECT "appointments".* FROM "appointments" WHERE "appointments"."pet_id" = $1[0m  [["pet_id", 1]]
+[active_model_serializers]   ↳ app/controllers/users_controller.rb:23:in `vet_pet_appointment'
+[active_model_serializers] Rendered ActiveModel::Serializer::CollectionSerializer with Array (2.74ms)
+Completed 200 OK in 7ms (Views: 3.3ms | ActiveRecord: 0.5ms | Allocations: 2718)
+
+
+Started POST "/vet_pets" for ::1 at 2021-12-20 06:29:32 +0200
+Processing by UsersController#vet_pets as */*
+  Parameters: {"user"=>{}}
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/auth/authorize_api_request.rb:20:in `user'
+  [1m[36mPet Load (0.3ms)[0m  [1m[34mSELECT "pets".* FROM "pets" WHERE "pets"."vet_id" = $1[0m  [["vet_id", 3]]
+  ↳ app/controllers/users_controller.rb:12:in `vet_pets'
+No serializer found for resource: #<Pet id: 1, name: "first pet", user_id: 2, created_at: "2021-12-20 03:45:17.934292000 +0000", updated_at: "2021-12-20 03:59:44.123236000 +0000", vet_id: 3>
+[active_model_serializers] Rendered ActiveModel::Serializer::CollectionSerializer with Pet::ActiveRecord_Relation (0.29ms)
+Completed 200 OK in 5ms (Views: 2.2ms | ActiveRecord: 0.6ms | Allocations: 1635)
+
+
+Started POST "/vet_pet_appointment" for ::1 at 2021-12-20 06:29:34 +0200
+Processing by UsersController#vet_pet_appointment as */*
+  Parameters: {"pet_id"=>"2", "user"=>{}}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/auth/authorize_api_request.rb:20:in `user'
+  [1m[36mPet Load (0.1ms)[0m  [1m[34mSELECT "pets".* FROM "pets" WHERE "pets"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:21:in `vet_pet_appointment'
+No serializer found for resource: #<Pet id: 2, name: "test", user_id: 2, created_at: "2021-12-20 04:04:32.313887000 +0000", updated_at: "2021-12-20 04:04:40.896312000 +0000", vet_id: 3>
+[active_model_serializers]   [1m[36mAppointment Load (0.2ms)[0m  [1m[34mSELECT "appointments".* FROM "appointments" WHERE "appointments"."pet_id" = $1[0m  [["pet_id", 2]]
+[active_model_serializers]   ↳ app/controllers/users_controller.rb:23:in `vet_pet_appointment'
+[active_model_serializers] Rendered ActiveModel::Serializer::CollectionSerializer with Array (1.87ms)
+Completed 200 OK in 5ms (Views: 2.4ms | ActiveRecord: 0.5ms | Allocations: 2111)
+
+
+Started POST "/vet_pet_appointment" for ::1 at 2021-12-20 06:29:36 +0200
+Processing by UsersController#vet_pet_appointment as */*
+  Parameters: {"pet_id"=>"1", "user"=>{}}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/auth/authorize_api_request.rb:20:in `user'
+  [1m[36mPet Load (0.2ms)[0m  [1m[34mSELECT "pets".* FROM "pets" WHERE "pets"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:21:in `vet_pet_appointment'
+No serializer found for resource: #<Pet id: 1, name: "first pet", user_id: 2, created_at: "2021-12-20 03:45:17.934292000 +0000", updated_at: "2021-12-20 03:59:44.123236000 +0000", vet_id: 3>
+[active_model_serializers]   [1m[36mAppointment Load (0.1ms)[0m  [1m[34mSELECT "appointments".* FROM "appointments" WHERE "appointments"."pet_id" = $1[0m  [["pet_id", 1]]
+[active_model_serializers]   ↳ app/controllers/users_controller.rb:23:in `vet_pet_appointment'
+[active_model_serializers] Rendered ActiveModel::Serializer::CollectionSerializer with Array (2.21ms)
+Completed 200 OK in 6ms (Views: 2.7ms | ActiveRecord: 0.5ms | Allocations: 2718)
+
+
+Started POST "/vet_pet_appointment" for ::1 at 2021-12-20 06:29:39 +0200
+Processing by UsersController#vet_pet_appointment as */*
+  Parameters: {"pet_id"=>"2", "user"=>{}}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/auth/authorize_api_request.rb:20:in `user'
+  [1m[36mPet Load (0.1ms)[0m  [1m[34mSELECT "pets".* FROM "pets" WHERE "pets"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:21:in `vet_pet_appointment'
+No serializer found for resource: #<Pet id: 2, name: "test", user_id: 2, created_at: "2021-12-20 04:04:32.313887000 +0000", updated_at: "2021-12-20 04:04:40.896312000 +0000", vet_id: 3>
+[active_model_serializers]   [1m[36mAppointment Load (0.1ms)[0m  [1m[34mSELECT "appointments".* FROM "appointments" WHERE "appointments"."pet_id" = $1[0m  [["pet_id", 2]]
+[active_model_serializers]   ↳ app/controllers/users_controller.rb:23:in `vet_pet_appointment'
+[active_model_serializers] Rendered ActiveModel::Serializer::CollectionSerializer with Array (2.02ms)
+Completed 200 OK in 6ms (Views: 2.5ms | ActiveRecord: 0.5ms | Allocations: 2111)
+
+
+Started POST "/vet_pet_appointment" for ::1 at 2021-12-20 06:29:40 +0200
+Processing by UsersController#vet_pet_appointment as */*
+  Parameters: {"pet_id"=>"1", "user"=>{}}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/auth/authorize_api_request.rb:20:in `user'
+  [1m[36mPet Load (0.2ms)[0m  [1m[34mSELECT "pets".* FROM "pets" WHERE "pets"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:21:in `vet_pet_appointment'
+No serializer found for resource: #<Pet id: 1, name: "first pet", user_id: 2, created_at: "2021-12-20 03:45:17.934292000 +0000", updated_at: "2021-12-20 03:59:44.123236000 +0000", vet_id: 3>
+[active_model_serializers]   [1m[36mAppointment Load (0.2ms)[0m  [1m[34mSELECT "appointments".* FROM "appointments" WHERE "appointments"."pet_id" = $1[0m  [["pet_id", 1]]
+[active_model_serializers]   ↳ app/controllers/users_controller.rb:23:in `vet_pet_appointment'
+[active_model_serializers] Rendered ActiveModel::Serializer::CollectionSerializer with Array (2.54ms)
+Completed 200 OK in 7ms (Views: 3.3ms | ActiveRecord: 0.5ms | Allocations: 2718)
+
+
+Started POST "/vet_pets" for ::1 at 2021-12-20 06:30:25 +0200
+Processing by UsersController#vet_pets as */*
+  Parameters: {"user"=>{}}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/auth/authorize_api_request.rb:20:in `user'
+  [1m[36mPet Load (0.2ms)[0m  [1m[34mSELECT "pets".* FROM "pets" WHERE "pets"."vet_id" = $1[0m  [["vet_id", 3]]
+  ↳ app/controllers/users_controller.rb:12:in `vet_pets'
+No serializer found for resource: #<Pet id: 1, name: "first pet", user_id: 2, created_at: "2021-12-20 03:45:17.934292000 +0000", updated_at: "2021-12-20 03:59:44.123236000 +0000", vet_id: 3>
+[active_model_serializers] Rendered ActiveModel::Serializer::CollectionSerializer with Pet::ActiveRecord_Relation (0.26ms)
+Completed 200 OK in 4ms (Views: 2.0ms | ActiveRecord: 0.4ms | Allocations: 1606)
+
+
+Started POST "/vet_pet_appointment" for ::1 at 2021-12-20 06:30:26 +0200
+Processing by UsersController#vet_pet_appointment as */*
+  Parameters: {"pet_id"=>"1", "user"=>{}}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/auth/authorize_api_request.rb:20:in `user'
+  [1m[36mPet Load (0.1ms)[0m  [1m[34mSELECT "pets".* FROM "pets" WHERE "pets"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:21:in `vet_pet_appointment'
+No serializer found for resource: #<Pet id: 1, name: "first pet", user_id: 2, created_at: "2021-12-20 03:45:17.934292000 +0000", updated_at: "2021-12-20 03:59:44.123236000 +0000", vet_id: 3>
+[active_model_serializers]   [1m[36mAppointment Load (0.2ms)[0m  [1m[34mSELECT "appointments".* FROM "appointments" WHERE "appointments"."pet_id" = $1[0m  [["pet_id", 1]]
+[active_model_serializers]   ↳ app/controllers/users_controller.rb:23:in `vet_pet_appointment'
+[active_model_serializers] Rendered ActiveModel::Serializer::CollectionSerializer with Array (2.79ms)
+Completed 200 OK in 6ms (Views: 3.2ms | ActiveRecord: 0.5ms | Allocations: 2718)
+
+
+Started POST "/vet_pet_appointment" for ::1 at 2021-12-20 06:30:27 +0200
+Processing by UsersController#vet_pet_appointment as */*
+  Parameters: {"pet_id"=>"1", "user"=>{}}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/auth/authorize_api_request.rb:20:in `user'
+  [1m[36mPet Load (0.5ms)[0m  [1m[34mSELECT "pets".* FROM "pets" WHERE "pets"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:21:in `vet_pet_appointment'
+No serializer found for resource: #<Pet id: 1, name: "first pet", user_id: 2, created_at: "2021-12-20 03:45:17.934292000 +0000", updated_at: "2021-12-20 03:59:44.123236000 +0000", vet_id: 3>
+[active_model_serializers]   [1m[36mAppointment Load (0.2ms)[0m  [1m[34mSELECT "appointments".* FROM "appointments" WHERE "appointments"."pet_id" = $1[0m  [["pet_id", 1]]
+[active_model_serializers]   ↳ app/controllers/users_controller.rb:23:in `vet_pet_appointment'
+[active_model_serializers] Rendered ActiveModel::Serializer::CollectionSerializer with Array (3.11ms)
+Completed 200 OK in 9ms (Views: 3.6ms | ActiveRecord: 0.9ms | Allocations: 2718)
+
+
+Started POST "/vet_pets" for ::1 at 2021-12-20 06:30:29 +0200
+Processing by UsersController#vet_pets as */*
+  Parameters: {"user"=>{}}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/auth/authorize_api_request.rb:20:in `user'
+  [1m[36mPet Load (0.2ms)[0m  [1m[34mSELECT "pets".* FROM "pets" WHERE "pets"."vet_id" = $1[0m  [["vet_id", 3]]
+  ↳ app/controllers/users_controller.rb:12:in `vet_pets'
+No serializer found for resource: #<Pet id: 1, name: "first pet", user_id: 2, created_at: "2021-12-20 03:45:17.934292000 +0000", updated_at: "2021-12-20 03:59:44.123236000 +0000", vet_id: 3>
+[active_model_serializers] Rendered ActiveModel::Serializer::CollectionSerializer with Pet::ActiveRecord_Relation (0.24ms)
+Completed 200 OK in 5ms (Views: 2.2ms | ActiveRecord: 0.4ms | Allocations: 1607)
+
+
+Started POST "/vet_pet_appointment" for ::1 at 2021-12-20 06:30:30 +0200
+Processing by UsersController#vet_pet_appointment as */*
+  Parameters: {"pet_id"=>"2", "user"=>{}}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/auth/authorize_api_request.rb:20:in `user'
+  [1m[36mPet Load (0.2ms)[0m  [1m[34mSELECT "pets".* FROM "pets" WHERE "pets"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:21:in `vet_pet_appointment'
+No serializer found for resource: #<Pet id: 2, name: "test", user_id: 2, created_at: "2021-12-20 04:04:32.313887000 +0000", updated_at: "2021-12-20 04:04:40.896312000 +0000", vet_id: 3>
+[active_model_serializers]   [1m[36mAppointment Load (0.2ms)[0m  [1m[34mSELECT "appointments".* FROM "appointments" WHERE "appointments"."pet_id" = $1[0m  [["pet_id", 2]]
+[active_model_serializers]   ↳ app/controllers/users_controller.rb:23:in `vet_pet_appointment'
+[active_model_serializers] Rendered ActiveModel::Serializer::CollectionSerializer with Array (1.51ms)
+Completed 200 OK in 5ms (Views: 2.1ms | ActiveRecord: 0.5ms | Allocations: 2111)
+
+
+Started POST "/vet_pet_appointment" for ::1 at 2021-12-20 06:30:31 +0200
+Processing by UsersController#vet_pet_appointment as */*
+  Parameters: {"pet_id"=>"1", "user"=>{}}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/auth/authorize_api_request.rb:20:in `user'
+  [1m[36mPet Load (0.2ms)[0m  [1m[34mSELECT "pets".* FROM "pets" WHERE "pets"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:21:in `vet_pet_appointment'
+No serializer found for resource: #<Pet id: 1, name: "first pet", user_id: 2, created_at: "2021-12-20 03:45:17.934292000 +0000", updated_at: "2021-12-20 03:59:44.123236000 +0000", vet_id: 3>
+[active_model_serializers]   [1m[36mAppointment Load (0.1ms)[0m  [1m[34mSELECT "appointments".* FROM "appointments" WHERE "appointments"."pet_id" = $1[0m  [["pet_id", 1]]
+[active_model_serializers]   ↳ app/controllers/users_controller.rb:23:in `vet_pet_appointment'
+[active_model_serializers] Rendered ActiveModel::Serializer::CollectionSerializer with Array (2.12ms)
+Completed 200 OK in 7ms (Views: 2.7ms | ActiveRecord: 0.6ms | Allocations: 2718)
+
+
+Started POST "/vet_pet_appointment" for ::1 at 2021-12-20 06:30:35 +0200
+Processing by UsersController#vet_pet_appointment as */*
+  Parameters: {"pet_id"=>"2", "user"=>{}}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/auth/authorize_api_request.rb:20:in `user'
+  [1m[36mPet Load (0.1ms)[0m  [1m[34mSELECT "pets".* FROM "pets" WHERE "pets"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:21:in `vet_pet_appointment'
+No serializer found for resource: #<Pet id: 2, name: "test", user_id: 2, created_at: "2021-12-20 04:04:32.313887000 +0000", updated_at: "2021-12-20 04:04:40.896312000 +0000", vet_id: 3>
+[active_model_serializers]   [1m[36mAppointment Load (0.1ms)[0m  [1m[34mSELECT "appointments".* FROM "appointments" WHERE "appointments"."pet_id" = $1[0m  [["pet_id", 2]]
+[active_model_serializers]   ↳ app/controllers/users_controller.rb:23:in `vet_pet_appointment'
+[active_model_serializers] Rendered ActiveModel::Serializer::CollectionSerializer with Array (1.52ms)
+Completed 200 OK in 5ms (Views: 2.0ms | ActiveRecord: 0.5ms | Allocations: 2111)
+
+
+Started POST "/vet_pets" for ::1 at 2021-12-20 06:31:41 +0200
+Processing by UsersController#vet_pets as */*
+  Parameters: {"user"=>{}}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/auth/authorize_api_request.rb:20:in `user'
+  [1m[36mPet Load (0.2ms)[0m  [1m[34mSELECT "pets".* FROM "pets" WHERE "pets"."vet_id" = $1[0m  [["vet_id", 3]]
+  ↳ app/controllers/users_controller.rb:12:in `vet_pets'
+No serializer found for resource: #<Pet id: 1, name: "first pet", user_id: 2, created_at: "2021-12-20 03:45:17.934292000 +0000", updated_at: "2021-12-20 03:59:44.123236000 +0000", vet_id: 3>
+[active_model_serializers] Rendered ActiveModel::Serializer::CollectionSerializer with Pet::ActiveRecord_Relation (0.32ms)
+Completed 200 OK in 4ms (Views: 2.0ms | ActiveRecord: 0.3ms | Allocations: 1606)
+
+
+Started POST "/vet_pet_appointment" for ::1 at 2021-12-20 06:31:42 +0200
+Processing by UsersController#vet_pet_appointment as */*
+  Parameters: {"pet_id"=>"2", "user"=>{}}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/auth/authorize_api_request.rb:20:in `user'
+  [1m[36mPet Load (0.1ms)[0m  [1m[34mSELECT "pets".* FROM "pets" WHERE "pets"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:21:in `vet_pet_appointment'
+No serializer found for resource: #<Pet id: 2, name: "test", user_id: 2, created_at: "2021-12-20 04:04:32.313887000 +0000", updated_at: "2021-12-20 04:04:40.896312000 +0000", vet_id: 3>
+[active_model_serializers]   [1m[36mAppointment Load (0.1ms)[0m  [1m[34mSELECT "appointments".* FROM "appointments" WHERE "appointments"."pet_id" = $1[0m  [["pet_id", 2]]
+[active_model_serializers]   ↳ app/controllers/users_controller.rb:23:in `vet_pet_appointment'
+[active_model_serializers] Rendered ActiveModel::Serializer::CollectionSerializer with Array (1.38ms)
+Completed 200 OK in 5ms (Views: 1.8ms | ActiveRecord: 0.4ms | Allocations: 2111)
+
+
+Started POST "/vet_pet_appointment" for ::1 at 2021-12-20 06:32:02 +0200
+Processing by UsersController#vet_pet_appointment as */*
+  Parameters: {"pet_id"=>"2", "user"=>{}}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/auth/authorize_api_request.rb:20:in `user'
+  [1m[36mPet Load (0.2ms)[0m  [1m[34mSELECT "pets".* FROM "pets" WHERE "pets"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:21:in `vet_pet_appointment'
+No serializer found for resource: #<Pet id: 2, name: "test", user_id: 2, created_at: "2021-12-20 04:04:32.313887000 +0000", updated_at: "2021-12-20 04:04:40.896312000 +0000", vet_id: 3>
+[active_model_serializers]   [1m[36mAppointment Load (0.2ms)[0m  [1m[34mSELECT "appointments".* FROM "appointments" WHERE "appointments"."pet_id" = $1[0m  [["pet_id", 2]]
+[active_model_serializers]   ↳ app/controllers/users_controller.rb:23:in `vet_pet_appointment'
+[active_model_serializers] Rendered ActiveModel::Serializer::CollectionSerializer with Array (1.81ms)
+Completed 200 OK in 6ms (Views: 2.6ms | ActiveRecord: 0.5ms | Allocations: 2111)
+
+
+Started POST "/vet_pet_appointment" for ::1 at 2021-12-20 06:32:07 +0200
+Processing by UsersController#vet_pet_appointment as */*
+  Parameters: {"pet_id"=>"2", "user"=>{}}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/auth/authorize_api_request.rb:20:in `user'
+  [1m[36mPet Load (0.1ms)[0m  [1m[34mSELECT "pets".* FROM "pets" WHERE "pets"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:21:in `vet_pet_appointment'
+No serializer found for resource: #<Pet id: 2, name: "test", user_id: 2, created_at: "2021-12-20 04:04:32.313887000 +0000", updated_at: "2021-12-20 04:04:40.896312000 +0000", vet_id: 3>
+[active_model_serializers]   [1m[36mAppointment Load (0.1ms)[0m  [1m[34mSELECT "appointments".* FROM "appointments" WHERE "appointments"."pet_id" = $1[0m  [["pet_id", 2]]
+[active_model_serializers]   ↳ app/controllers/users_controller.rb:23:in `vet_pet_appointment'
+[active_model_serializers] Rendered ActiveModel::Serializer::CollectionSerializer with Array (1.69ms)
+Completed 200 OK in 5ms (Views: 2.2ms | ActiveRecord: 0.4ms | Allocations: 2111)
+
+
+Started POST "/vet_pet_appointment" for ::1 at 2021-12-20 06:32:37 +0200
+Processing by UsersController#vet_pet_appointment as */*
+  Parameters: {"pet_id"=>"2", "user"=>{}}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/auth/authorize_api_request.rb:20:in `user'
+  [1m[36mPet Load (0.1ms)[0m  [1m[34mSELECT "pets".* FROM "pets" WHERE "pets"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:21:in `vet_pet_appointment'
+No serializer found for resource: #<Pet id: 2, name: "test", user_id: 2, created_at: "2021-12-20 04:04:32.313887000 +0000", updated_at: "2021-12-20 04:04:40.896312000 +0000", vet_id: 3>
+[active_model_serializers]   [1m[36mAppointment Load (0.2ms)[0m  [1m[34mSELECT "appointments".* FROM "appointments" WHERE "appointments"."pet_id" = $1[0m  [["pet_id", 2]]
+[active_model_serializers]   ↳ app/controllers/users_controller.rb:23:in `vet_pet_appointment'
+[active_model_serializers] Rendered ActiveModel::Serializer::CollectionSerializer with Array (1.69ms)
+Completed 200 OK in 5ms (Views: 2.4ms | ActiveRecord: 0.4ms | Allocations: 2111)
+
+
+Started POST "/vet_registration" for ::1 at 2021-12-20 06:32:38 +0200
+Processing by UsersController#vet_registration as */*
+  Parameters: {"user"=>{}}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/auth/authorize_api_request.rb:20:in `user'
+Completed 200 OK in 2ms (Views: 0.2ms | ActiveRecord: 0.2ms | Allocations: 695)
+
+
+Started POST "/vet_pet_appointment" for ::1 at 2021-12-20 06:32:38 +0200
+Processing by UsersController#vet_pet_appointment as */*
+  Parameters: {"pet_id"=>"2", "user"=>{}}
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/auth/authorize_api_request.rb:20:in `user'
+  [1m[36mPet Load (0.1ms)[0m  [1m[34mSELECT "pets".* FROM "pets" WHERE "pets"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:21:in `vet_pet_appointment'
+No serializer found for resource: #<Pet id: 2, name: "test", user_id: 2, created_at: "2021-12-20 04:04:32.313887000 +0000", updated_at: "2021-12-20 04:04:40.896312000 +0000", vet_id: 3>
+[active_model_serializers]   [1m[36mAppointment Load (0.1ms)[0m  [1m[34mSELECT "appointments".* FROM "appointments" WHERE "appointments"."pet_id" = $1[0m  [["pet_id", 2]]
+[active_model_serializers]   ↳ app/controllers/users_controller.rb:23:in `vet_pet_appointment'
+[active_model_serializers] Rendered ActiveModel::Serializer::CollectionSerializer with Array (1.41ms)
+Completed 200 OK in 5ms (Views: 2.2ms | ActiveRecord: 0.4ms | Allocations: 2111)
+
+
+Started POST "/vet_registration" for ::1 at 2021-12-20 06:32:39 +0200
+Processing by UsersController#vet_registration as */*
+  Parameters: {"user"=>{}}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/auth/authorize_api_request.rb:20:in `user'
+Completed 200 OK in 2ms (Views: 0.2ms | ActiveRecord: 0.2ms | Allocations: 695)
+
+
+Started POST "/vet_pet_appointment" for ::1 at 2021-12-20 06:32:39 +0200
+Processing by UsersController#vet_pet_appointment as */*
+  Parameters: {"pet_id"=>"2", "user"=>{}}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/auth/authorize_api_request.rb:20:in `user'
+  [1m[36mPet Load (0.1ms)[0m  [1m[34mSELECT "pets".* FROM "pets" WHERE "pets"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:21:in `vet_pet_appointment'
+No serializer found for resource: #<Pet id: 2, name: "test", user_id: 2, created_at: "2021-12-20 04:04:32.313887000 +0000", updated_at: "2021-12-20 04:04:40.896312000 +0000", vet_id: 3>
+[active_model_serializers]   [1m[36mAppointment Load (0.1ms)[0m  [1m[34mSELECT "appointments".* FROM "appointments" WHERE "appointments"."pet_id" = $1[0m  [["pet_id", 2]]
+[active_model_serializers]   ↳ app/controllers/users_controller.rb:23:in `vet_pet_appointment'
+[active_model_serializers] Rendered ActiveModel::Serializer::CollectionSerializer with Array (1.75ms)
+Completed 200 OK in 5ms (Views: 2.3ms | ActiveRecord: 0.5ms | Allocations: 2111)
+
+
+Started POST "/vet_registration" for ::1 at 2021-12-20 06:32:40 +0200
+Processing by UsersController#vet_registration as */*
+  Parameters: {"user"=>{}}
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/auth/authorize_api_request.rb:20:in `user'
+Completed 200 OK in 2ms (Views: 0.2ms | ActiveRecord: 0.3ms | Allocations: 695)
+
+
+Started POST "/vet_pet_appointment" for ::1 at 2021-12-20 06:32:40 +0200
+Processing by UsersController#vet_pet_appointment as */*
+  Parameters: {"pet_id"=>"2", "user"=>{}}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/auth/authorize_api_request.rb:20:in `user'
+  [1m[36mPet Load (0.1ms)[0m  [1m[34mSELECT "pets".* FROM "pets" WHERE "pets"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:21:in `vet_pet_appointment'
+No serializer found for resource: #<Pet id: 2, name: "test", user_id: 2, created_at: "2021-12-20 04:04:32.313887000 +0000", updated_at: "2021-12-20 04:04:40.896312000 +0000", vet_id: 3>
+[active_model_serializers]   [1m[36mAppointment Load (0.1ms)[0m  [1m[34mSELECT "appointments".* FROM "appointments" WHERE "appointments"."pet_id" = $1[0m  [["pet_id", 2]]
+[active_model_serializers]   ↳ app/controllers/users_controller.rb:23:in `vet_pet_appointment'
+[active_model_serializers] Rendered ActiveModel::Serializer::CollectionSerializer with Array (1.77ms)
+Completed 200 OK in 5ms (Views: 2.3ms | ActiveRecord: 0.4ms | Allocations: 2111)
+
+
+Started POST "/index" for ::1 at 2021-12-20 06:32:50 +0200
+Processing by ApplicationController#index as */*
+  Parameters: {"application"=>{}}
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/auth/authorize_api_request.rb:20:in `user'
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:10:in `index'
+Completed 200 OK in 3ms (Views: 0.2ms | ActiveRecord: 0.4ms | Allocations: 1060)
+
+
+Started POST "/vet_pets" for ::1 at 2021-12-20 06:32:51 +0200
+Processing by UsersController#vet_pets as */*
+  Parameters: {"user"=>{}}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/auth/authorize_api_request.rb:20:in `user'
+  [1m[36mPet Load (0.2ms)[0m  [1m[34mSELECT "pets".* FROM "pets" WHERE "pets"."vet_id" = $1[0m  [["vet_id", 3]]
+  ↳ app/controllers/users_controller.rb:12:in `vet_pets'
+No serializer found for resource: #<Pet id: 1, name: "first pet", user_id: 2, created_at: "2021-12-20 03:45:17.934292000 +0000", updated_at: "2021-12-20 03:59:44.123236000 +0000", vet_id: 3>
+[active_model_serializers] Rendered ActiveModel::Serializer::CollectionSerializer with Pet::ActiveRecord_Relation (0.29ms)
+Completed 200 OK in 4ms (Views: 1.9ms | ActiveRecord: 0.3ms | Allocations: 1606)
+
+
+Started POST "/vet_pet_appointment" for ::1 at 2021-12-20 06:32:52 +0200
+Processing by UsersController#vet_pet_appointment as */*
+  Parameters: {"pet_id"=>"1", "user"=>{}}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/auth/authorize_api_request.rb:20:in `user'
+  [1m[36mPet Load (0.1ms)[0m  [1m[34mSELECT "pets".* FROM "pets" WHERE "pets"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:21:in `vet_pet_appointment'
+No serializer found for resource: #<Pet id: 1, name: "first pet", user_id: 2, created_at: "2021-12-20 03:45:17.934292000 +0000", updated_at: "2021-12-20 03:59:44.123236000 +0000", vet_id: 3>
+[active_model_serializers]   [1m[36mAppointment Load (0.1ms)[0m  [1m[34mSELECT "appointments".* FROM "appointments" WHERE "appointments"."pet_id" = $1[0m  [["pet_id", 1]]
+[active_model_serializers]   ↳ app/controllers/users_controller.rb:23:in `vet_pet_appointment'
+[active_model_serializers] Rendered ActiveModel::Serializer::CollectionSerializer with Array (2.73ms)
+Completed 200 OK in 6ms (Views: 3.3ms | ActiveRecord: 0.5ms | Allocations: 2718)
+
+
+Started POST "/vet_pet_appointment" for ::1 at 2021-12-20 06:32:54 +0200
+Processing by UsersController#vet_pet_appointment as */*
+  Parameters: {"pet_id"=>"1", "user"=>{}}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/auth/authorize_api_request.rb:20:in `user'
+  [1m[36mPet Load (0.2ms)[0m  [1m[34mSELECT "pets".* FROM "pets" WHERE "pets"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:21:in `vet_pet_appointment'
+No serializer found for resource: #<Pet id: 1, name: "first pet", user_id: 2, created_at: "2021-12-20 03:45:17.934292000 +0000", updated_at: "2021-12-20 03:59:44.123236000 +0000", vet_id: 3>
+[active_model_serializers]   [1m[36mAppointment Load (0.2ms)[0m  [1m[34mSELECT "appointments".* FROM "appointments" WHERE "appointments"."pet_id" = $1[0m  [["pet_id", 1]]
+[active_model_serializers]   ↳ app/controllers/users_controller.rb:23:in `vet_pet_appointment'
+[active_model_serializers] Rendered ActiveModel::Serializer::CollectionSerializer with Array (2.64ms)
+Completed 200 OK in 7ms (Views: 3.3ms | ActiveRecord: 0.6ms | Allocations: 2718)
+
+
+Started POST "/vet_pet_appointment" for ::1 at 2021-12-20 06:33:16 +0200
+Processing by UsersController#vet_pet_appointment as */*
+  Parameters: {"pet_id"=>"1", "user"=>{}}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/auth/authorize_api_request.rb:20:in `user'
+  [1m[36mPet Load (0.2ms)[0m  [1m[34mSELECT "pets".* FROM "pets" WHERE "pets"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:21:in `vet_pet_appointment'
+No serializer found for resource: #<Pet id: 1, name: "first pet", user_id: 2, created_at: "2021-12-20 03:45:17.934292000 +0000", updated_at: "2021-12-20 03:59:44.123236000 +0000", vet_id: 3>
+[active_model_serializers]   [1m[36mAppointment Load (0.2ms)[0m  [1m[34mSELECT "appointments".* FROM "appointments" WHERE "appointments"."pet_id" = $1[0m  [["pet_id", 1]]
+[active_model_serializers]   ↳ app/controllers/users_controller.rb:23:in `vet_pet_appointment'
+[active_model_serializers] Rendered ActiveModel::Serializer::CollectionSerializer with Array (2.54ms)
+Completed 200 OK in 6ms (Views: 3.5ms | ActiveRecord: 0.5ms | Allocations: 2718)
+
+
+Started POST "/vet_registration" for ::1 at 2021-12-20 06:33:19 +0200
+Processing by UsersController#vet_registration as */*
+  Parameters: {"user"=>{}}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/auth/authorize_api_request.rb:20:in `user'
+Completed 200 OK in 2ms (Views: 0.3ms | ActiveRecord: 0.2ms | Allocations: 695)
+
+
+Started POST "/vet_pet_appointment" for ::1 at 2021-12-20 06:33:19 +0200
+Processing by UsersController#vet_pet_appointment as */*
+  Parameters: {"pet_id"=>"1", "user"=>{}}
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/auth/authorize_api_request.rb:20:in `user'
+  [1m[36mPet Load (0.1ms)[0m  [1m[34mSELECT "pets".* FROM "pets" WHERE "pets"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:21:in `vet_pet_appointment'
+No serializer found for resource: #<Pet id: 1, name: "first pet", user_id: 2, created_at: "2021-12-20 03:45:17.934292000 +0000", updated_at: "2021-12-20 03:59:44.123236000 +0000", vet_id: 3>
+[active_model_serializers]   [1m[36mAppointment Load (0.1ms)[0m  [1m[34mSELECT "appointments".* FROM "appointments" WHERE "appointments"."pet_id" = $1[0m  [["pet_id", 1]]
+[active_model_serializers]   ↳ app/controllers/users_controller.rb:23:in `vet_pet_appointment'
+[active_model_serializers] Rendered ActiveModel::Serializer::CollectionSerializer with Array (2.17ms)
+Completed 200 OK in 5ms (Views: 2.6ms | ActiveRecord: 0.4ms | Allocations: 2718)
+
+
+Started POST "/index" for ::1 at 2021-12-20 06:34:08 +0200
+Processing by ApplicationController#index as */*
+  Parameters: {"application"=>{}}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/auth/authorize_api_request.rb:20:in `user'
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:10:in `index'
+Completed 200 OK in 2ms (Views: 0.2ms | ActiveRecord: 0.2ms | Allocations: 988)
+
+
+Started POST "/pet_add" for ::1 at 2021-12-20 06:34:12 +0200
+Processing by PetsController#create as */*
+  Parameters: {"name"=>"zzz", "application"=>{"name"=>"zzz"}}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/auth/authorize_api_request.rb:20:in `user'
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/pets_controller.rb:15:in `create'
+  [1m[36mPet Create (0.6ms)[0m  [1m[32mINSERT INTO "pets" ("name", "user_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["name", "zzz"], ["user_id", 2], ["created_at", "2021-12-20 04:34:12.685503"], ["updated_at", "2021-12-20 04:34:12.685503"]]
+  ↳ app/controllers/pets_controller.rb:15:in `create'
+  [1m[36mTRANSACTION (0.9ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/controllers/pets_controller.rb:15:in `create'
+Completed 201 Created in 6ms (Views: 0.1ms | ActiveRecord: 1.8ms | Allocations: 2349)
+
+
+Started POST "/index" for ::1 at 2021-12-20 06:34:12 +0200
+Processing by ApplicationController#index as */*
+  Parameters: {"application"=>{}}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/auth/authorize_api_request.rb:20:in `user'
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:10:in `index'
+Completed 200 OK in 2ms (Views: 0.2ms | ActiveRecord: 0.2ms | Allocations: 988)
+
+
+Started GET "/pets_list" for ::1 at 2021-12-20 06:34:13 +0200
+Processing by PetsController#index as */*
+  Parameters: {"application"=>{}}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/auth/authorize_api_request.rb:20:in `user'
+  [1m[36mPet Load (3.3ms)[0m  [1m[34mSELECT "pets".* FROM "pets" WHERE "pets"."user_id" = $1[0m  [["user_id", 2]]
+  ↳ app/controllers/pets_controller.rb:5:in `index'
+No serializer found for resource: #<Pet id: 1, name: "first pet", user_id: 2, created_at: "2021-12-20 03:45:17.934292000 +0000", updated_at: "2021-12-20 03:59:44.123236000 +0000", vet_id: 3>
+[active_model_serializers]   [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."role" = $1[0m  [["role", 1]]
+[active_model_serializers]   ↳ app/controllers/pets_controller.rb:5:in `index'
+[active_model_serializers] Rendered ActiveModel::Serializer::CollectionSerializer with Array (2.54ms)
+Completed 200 OK in 11ms (Views: 4.7ms | ActiveRecord: 3.6ms | Allocations: 2662)
+
+
+Started POST "/register" for ::1 at 2021-12-20 06:34:17 +0200
+Processing by PetsController#register as */*
+  Parameters: {"pet_id"=>"3", "vet_id"=>"3", "application"=>{"pet_id"=>"3", "vet_id"=>"3"}}
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/auth/authorize_api_request.rb:20:in `user'
+  [1m[36mPet Load (0.2ms)[0m  [1m[34mSELECT "pets".* FROM "pets" WHERE "pets"."id" = $1 LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/controllers/pets_controller.rb:55:in `register'
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/pets_controller.rb:57:in `register'
+  [1m[36mPet Update (0.4ms)[0m  [1m[33mUPDATE "pets" SET "updated_at" = $1, "vet_id" = $2 WHERE "pets"."id" = $3[0m  [["updated_at", "2021-12-20 04:34:17.060377"], ["vet_id", 3], ["id", 3]]
+  ↳ app/controllers/pets_controller.rb:57:in `register'
+  [1m[36mTRANSACTION (0.9ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/controllers/pets_controller.rb:57:in `register'
+Completed 201 Created in 7ms (Views: 0.1ms | ActiveRecord: 1.7ms | Allocations: 2571)
+
+
+Started GET "/pets_list" for ::1 at 2021-12-20 06:34:18 +0200
+Processing by PetsController#index as */*
+  Parameters: {"application"=>{}}
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/auth/authorize_api_request.rb:20:in `user'
+  [1m[36mPet Load (0.2ms)[0m  [1m[34mSELECT "pets".* FROM "pets" WHERE "pets"."user_id" = $1[0m  [["user_id", 2]]
+  ↳ app/controllers/pets_controller.rb:5:in `index'
+No serializer found for resource: #<Pet id: 1, name: "first pet", user_id: 2, created_at: "2021-12-20 03:45:17.934292000 +0000", updated_at: "2021-12-20 03:59:44.123236000 +0000", vet_id: 3>
+[active_model_serializers]   [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."role" = $1[0m  [["role", 1]]
+[active_model_serializers]   ↳ app/controllers/pets_controller.rb:5:in `index'
+[active_model_serializers] Rendered ActiveModel::Serializer::CollectionSerializer with Array (1.84ms)
+Completed 200 OK in 6ms (Views: 3.2ms | ActiveRecord: 0.5ms | Allocations: 2605)
+
+
+Started GET "/pet_show" for ::1 at 2021-12-20 06:34:36 +0200
+Processing by PetsController#show as */*
+  Parameters: {"id"=>"3", "application"=>{"id"=>"3"}}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/auth/authorize_api_request.rb:20:in `user'
+  [1m[36mPet Load (0.2ms)[0m  [1m[34mSELECT "pets".* FROM "pets" WHERE "pets"."id" = $1 LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/controllers/pets_controller.rb:23:in `show'
+  [1m[36mUser Load (0.8ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/controllers/pets_controller.rb:27:in `show'
+No serializer found for resource: #<Pet id: 3, name: "zzz", user_id: 2, created_at: "2021-12-20 04:34:12.685503000 +0000", updated_at: "2021-12-20 04:34:17.060377000 +0000", vet_id: 3>
+[active_model_serializers]   [1m[36mAppointment Load (4.2ms)[0m  [1m[34mSELECT "appointments".* FROM "appointments" WHERE "appointments"."pet_id" = $1[0m  [["pet_id", 3]]
+[active_model_serializers]   ↳ app/controllers/pets_controller.rb:29:in `show'
+[active_model_serializers] Rendered ActiveModel::Serializer::CollectionSerializer with Array (5.86ms)
+Completed 200 OK in 13ms (Views: 2.9ms | ActiveRecord: 5.3ms | Allocations: 2474)
+
+
+Started GET "/pet_show" for ::1 at 2021-12-20 06:34:39 +0200
+Processing by PetsController#show as */*
+  Parameters: {"id"=>"3", "application"=>{"id"=>"3"}}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/auth/authorize_api_request.rb:20:in `user'
+  [1m[36mPet Load (0.2ms)[0m  [1m[34mSELECT "pets".* FROM "pets" WHERE "pets"."id" = $1 LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/controllers/pets_controller.rb:23:in `show'
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/controllers/pets_controller.rb:27:in `show'
+No serializer found for resource: #<Pet id: 3, name: "zzz", user_id: 2, created_at: "2021-12-20 04:34:12.685503000 +0000", updated_at: "2021-12-20 04:34:17.060377000 +0000", vet_id: 3>
+[active_model_serializers]   [1m[36mAppointment Load (0.1ms)[0m  [1m[34mSELECT "appointments".* FROM "appointments" WHERE "appointments"."pet_id" = $1[0m  [["pet_id", 3]]
+[active_model_serializers]   ↳ app/controllers/pets_controller.rb:29:in `show'
+[active_model_serializers] Rendered ActiveModel::Serializer::CollectionSerializer with Array (1.68ms)
+Completed 200 OK in 6ms (Views: 2.2ms | ActiveRecord: 0.7ms | Allocations: 2469)
+
+
+Started GET "/pet_show" for ::1 at 2021-12-20 06:35:17 +0200
+Processing by PetsController#show as */*
+  Parameters: {"id"=>"3", "application"=>{"id"=>"3"}}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/auth/authorize_api_request.rb:20:in `user'
+  [1m[36mPet Load (0.2ms)[0m  [1m[34mSELECT "pets".* FROM "pets" WHERE "pets"."id" = $1 LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/controllers/pets_controller.rb:23:in `show'
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/controllers/pets_controller.rb:27:in `show'
+No serializer found for resource: #<Pet id: 3, name: "zzz", user_id: 2, created_at: "2021-12-20 04:34:12.685503000 +0000", updated_at: "2021-12-20 04:34:17.060377000 +0000", vet_id: 3>
+[active_model_serializers]   [1m[36mAppointment Load (0.2ms)[0m  [1m[34mSELECT "appointments".* FROM "appointments" WHERE "appointments"."pet_id" = $1[0m  [["pet_id", 3]]
+[active_model_serializers]   ↳ app/controllers/pets_controller.rb:29:in `show'
+[active_model_serializers] Rendered ActiveModel::Serializer::CollectionSerializer with Array (1.43ms)
+Completed 200 OK in 6ms (Views: 1.9ms | ActiveRecord: 0.6ms | Allocations: 2469)
+
+
+Started GET "/pet_show" for ::1 at 2021-12-20 06:35:18 +0200
+Processing by PetsController#show as */*
+  Parameters: {"id"=>"3", "application"=>{"id"=>"3"}}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/auth/authorize_api_request.rb:20:in `user'
+  [1m[36mPet Load (0.2ms)[0m  [1m[34mSELECT "pets".* FROM "pets" WHERE "pets"."id" = $1 LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/controllers/pets_controller.rb:23:in `show'
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/controllers/pets_controller.rb:27:in `show'
+No serializer found for resource: #<Pet id: 3, name: "zzz", user_id: 2, created_at: "2021-12-20 04:34:12.685503000 +0000", updated_at: "2021-12-20 04:34:17.060377000 +0000", vet_id: 3>
+[active_model_serializers]   [1m[36mAppointment Load (0.2ms)[0m  [1m[34mSELECT "appointments".* FROM "appointments" WHERE "appointments"."pet_id" = $1[0m  [["pet_id", 3]]
+[active_model_serializers]   ↳ app/controllers/pets_controller.rb:29:in `show'
+[active_model_serializers] Rendered ActiveModel::Serializer::CollectionSerializer with Array (1.42ms)
+Completed 200 OK in 9ms (Views: 1.8ms | ActiveRecord: 0.6ms | Allocations: 2470)
+
+
+Started GET "/pet_show" for ::1 at 2021-12-20 06:35:26 +0200
+Processing by PetsController#show as */*
+  Parameters: {"id"=>"3", "application"=>{"id"=>"3"}}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/auth/authorize_api_request.rb:20:in `user'
+  [1m[36mPet Load (0.1ms)[0m  [1m[34mSELECT "pets".* FROM "pets" WHERE "pets"."id" = $1 LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/controllers/pets_controller.rb:23:in `show'
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/controllers/pets_controller.rb:27:in `show'
+No serializer found for resource: #<Pet id: 3, name: "zzz", user_id: 2, created_at: "2021-12-20 04:34:12.685503000 +0000", updated_at: "2021-12-20 04:34:17.060377000 +0000", vet_id: 3>
+[active_model_serializers]   [1m[36mAppointment Load (0.1ms)[0m  [1m[34mSELECT "appointments".* FROM "appointments" WHERE "appointments"."pet_id" = $1[0m  [["pet_id", 3]]
+[active_model_serializers]   ↳ app/controllers/pets_controller.rb:29:in `show'
+[active_model_serializers] Rendered ActiveModel::Serializer::CollectionSerializer with Array (1.6ms)
+Completed 200 OK in 6ms (Views: 2.1ms | ActiveRecord: 0.5ms | Allocations: 2469)
+
+
+Started GET "/pets_list" for ::1 at 2021-12-20 06:35:27 +0200
+Processing by PetsController#index as */*
+  Parameters: {"application"=>{}}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/auth/authorize_api_request.rb:20:in `user'
+  [1m[36mPet Load (0.2ms)[0m  [1m[34mSELECT "pets".* FROM "pets" WHERE "pets"."user_id" = $1[0m  [["user_id", 2]]
+  ↳ app/controllers/pets_controller.rb:5:in `index'
+No serializer found for resource: #<Pet id: 1, name: "first pet", user_id: 2, created_at: "2021-12-20 03:45:17.934292000 +0000", updated_at: "2021-12-20 03:59:44.123236000 +0000", vet_id: 3>
+[active_model_serializers]   [1m[36mUser Load (1.4ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."role" = $1[0m  [["role", 1]]
+[active_model_serializers]   ↳ app/controllers/pets_controller.rb:5:in `index'
+[active_model_serializers] Rendered ActiveModel::Serializer::CollectionSerializer with Array (5.96ms)
+Completed 200 OK in 10ms (Views: 6.5ms | ActiveRecord: 1.9ms | Allocations: 2605)
+
+
+Started GET "/pet_show" for ::1 at 2021-12-20 06:35:30 +0200
+Processing by PetsController#show as */*
+  Parameters: {"id"=>"3", "application"=>{"id"=>"3"}}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/auth/authorize_api_request.rb:20:in `user'
+  [1m[36mPet Load (0.2ms)[0m  [1m[34mSELECT "pets".* FROM "pets" WHERE "pets"."id" = $1 LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/controllers/pets_controller.rb:23:in `show'
+  [1m[36mUser Load (3.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/controllers/pets_controller.rb:27:in `show'
+No serializer found for resource: #<Pet id: 3, name: "zzz", user_id: 2, created_at: "2021-12-20 04:34:12.685503000 +0000", updated_at: "2021-12-20 04:34:17.060377000 +0000", vet_id: 3>
+[active_model_serializers]   [1m[36mAppointment Load (0.4ms)[0m  [1m[34mSELECT "appointments".* FROM "appointments" WHERE "appointments"."pet_id" = $1[0m  [["pet_id", 3]]
+[active_model_serializers]   ↳ app/controllers/pets_controller.rb:29:in `show'
+[active_model_serializers] Rendered ActiveModel::Serializer::CollectionSerializer with Array (3.19ms)
+Completed 200 OK in 13ms (Views: 4.0ms | ActiveRecord: 3.8ms | Allocations: 2469)
+
+
+Started GET "/pet_show" for ::1 at 2021-12-20 06:35:36 +0200
+Processing by PetsController#show as */*
+  Parameters: {"id"=>"3", "application"=>{"id"=>"3"}}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/auth/authorize_api_request.rb:20:in `user'
+  [1m[36mPet Load (0.1ms)[0m  [1m[34mSELECT "pets".* FROM "pets" WHERE "pets"."id" = $1 LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/controllers/pets_controller.rb:23:in `show'
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/controllers/pets_controller.rb:27:in `show'
+No serializer found for resource: #<Pet id: 3, name: "zzz", user_id: 2, created_at: "2021-12-20 04:34:12.685503000 +0000", updated_at: "2021-12-20 04:34:17.060377000 +0000", vet_id: 3>
+[active_model_serializers]   [1m[36mAppointment Load (0.1ms)[0m  [1m[34mSELECT "appointments".* FROM "appointments" WHERE "appointments"."pet_id" = $1[0m  [["pet_id", 3]]
+[active_model_serializers]   ↳ app/controllers/pets_controller.rb:29:in `show'
+[active_model_serializers] Rendered ActiveModel::Serializer::CollectionSerializer with Array (2.37ms)
+Completed 200 OK in 7ms (Views: 2.9ms | ActiveRecord: 0.6ms | Allocations: 2469)
+
+
+Started GET "/pet_show" for ::1 at 2021-12-20 06:35:58 +0200
+Processing by PetsController#show as */*
+  Parameters: {"id"=>"3", "application"=>{"id"=>"3"}}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/auth/authorize_api_request.rb:20:in `user'
+  [1m[36mPet Load (0.1ms)[0m  [1m[34mSELECT "pets".* FROM "pets" WHERE "pets"."id" = $1 LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/controllers/pets_controller.rb:23:in `show'
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/controllers/pets_controller.rb:27:in `show'
+No serializer found for resource: #<Pet id: 3, name: "zzz", user_id: 2, created_at: "2021-12-20 04:34:12.685503000 +0000", updated_at: "2021-12-20 04:34:17.060377000 +0000", vet_id: 3>
+[active_model_serializers]   [1m[36mAppointment Load (0.1ms)[0m  [1m[34mSELECT "appointments".* FROM "appointments" WHERE "appointments"."pet_id" = $1[0m  [["pet_id", 3]]
+[active_model_serializers]   ↳ app/controllers/pets_controller.rb:29:in `show'
+[active_model_serializers] Rendered ActiveModel::Serializer::CollectionSerializer with Array (1.23ms)
+Completed 200 OK in 5ms (Views: 1.7ms | ActiveRecord: 0.5ms | Allocations: 2469)
+
+
+Started GET "/pet_show" for ::1 at 2021-12-20 06:36:16 +0200
+Processing by PetsController#show as */*
+  Parameters: {"id"=>"3", "application"=>{"id"=>"3"}}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/auth/authorize_api_request.rb:20:in `user'
+  [1m[36mPet Load (0.1ms)[0m  [1m[34mSELECT "pets".* FROM "pets" WHERE "pets"."id" = $1 LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/controllers/pets_controller.rb:23:in `show'
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/controllers/pets_controller.rb:27:in `show'
+No serializer found for resource: #<Pet id: 3, name: "zzz", user_id: 2, created_at: "2021-12-20 04:34:12.685503000 +0000", updated_at: "2021-12-20 04:34:17.060377000 +0000", vet_id: 3>
+[active_model_serializers]   [1m[36mAppointment Load (0.1ms)[0m  [1m[34mSELECT "appointments".* FROM "appointments" WHERE "appointments"."pet_id" = $1[0m  [["pet_id", 3]]
+[active_model_serializers]   ↳ app/controllers/pets_controller.rb:29:in `show'
+[active_model_serializers] Rendered ActiveModel::Serializer::CollectionSerializer with Array (1.86ms)
+Completed 200 OK in 6ms (Views: 2.3ms | ActiveRecord: 0.7ms | Allocations: 2469)
+
+
+Started GET "/pets_list" for ::1 at 2021-12-20 06:36:18 +0200
+Processing by PetsController#index as */*
+  Parameters: {"application"=>{}}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/auth/authorize_api_request.rb:20:in `user'
+  [1m[36mPet Load (2.4ms)[0m  [1m[34mSELECT "pets".* FROM "pets" WHERE "pets"."user_id" = $1[0m  [["user_id", 2]]
+  ↳ app/controllers/pets_controller.rb:5:in `index'
+No serializer found for resource: #<Pet id: 1, name: "first pet", user_id: 2, created_at: "2021-12-20 03:45:17.934292000 +0000", updated_at: "2021-12-20 03:59:44.123236000 +0000", vet_id: 3>
+[active_model_serializers]   [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."role" = $1[0m  [["role", 1]]
+[active_model_serializers]   ↳ app/controllers/pets_controller.rb:5:in `index'
+[active_model_serializers] Rendered ActiveModel::Serializer::CollectionSerializer with Array (2.15ms)
+Completed 200 OK in 10ms (Views: 4.9ms | ActiveRecord: 2.8ms | Allocations: 2605)
+
+
+Started POST "/appointment_create" for ::1 at 2021-12-20 06:36:21 +0200
+Processing by AppointmentsController#create as */*
+  Parameters: {"pet_id"=>"3", "vet_id"=>"3", "date"=>"2021-12-10", "application"=>{"pet_id"=>"3", "vet_id"=>"3", "date"=>"2021-12-10"}}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/auth/authorize_api_request.rb:20:in `user'
+Completed 400 Bad Request in 3ms (ActiveRecord: 0.2ms | Allocations: 713)
+
+
+  
+ActionController::ParameterMissing (param is missing or the value is empty: appointment
+Did you mean?  application
+               action
+               controller
+               date):
+  
+app/controllers/appointments_controller.rb:12:in `appointment_params'
+app/controllers/appointments_controller.rb:3:in `create'
+Started GET "/pet_show" for ::1 at 2021-12-20 06:36:22 +0200
+Processing by PetsController#show as */*
+  Parameters: {"id"=>"3", "application"=>{"id"=>"3"}}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/auth/authorize_api_request.rb:20:in `user'
+  [1m[36mPet Load (0.1ms)[0m  [1m[34mSELECT "pets".* FROM "pets" WHERE "pets"."id" = $1 LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/controllers/pets_controller.rb:23:in `show'
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/controllers/pets_controller.rb:27:in `show'
+No serializer found for resource: #<Pet id: 3, name: "zzz", user_id: 2, created_at: "2021-12-20 04:34:12.685503000 +0000", updated_at: "2021-12-20 04:34:17.060377000 +0000", vet_id: 3>
+[active_model_serializers]   [1m[36mAppointment Load (2.8ms)[0m  [1m[34mSELECT "appointments".* FROM "appointments" WHERE "appointments"."pet_id" = $1[0m  [["pet_id", 3]]
+[active_model_serializers]   ↳ app/controllers/pets_controller.rb:29:in `show'
+[active_model_serializers] Rendered ActiveModel::Serializer::CollectionSerializer with Array (5.12ms)
+Completed 200 OK in 11ms (Views: 3.4ms | ActiveRecord: 3.4ms | Allocations: 2468)
+
+
+Started GET "/pet_show" for ::1 at 2021-12-20 06:36:23 +0200
+Processing by PetsController#show as */*
+  Parameters: {"id"=>"3", "application"=>{"id"=>"3"}}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/auth/authorize_api_request.rb:20:in `user'
+  [1m[36mPet Load (0.1ms)[0m  [1m[34mSELECT "pets".* FROM "pets" WHERE "pets"."id" = $1 LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/controllers/pets_controller.rb:23:in `show'
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/controllers/pets_controller.rb:27:in `show'
+No serializer found for resource: #<Pet id: 3, name: "zzz", user_id: 2, created_at: "2021-12-20 04:34:12.685503000 +0000", updated_at: "2021-12-20 04:34:17.060377000 +0000", vet_id: 3>
+[active_model_serializers]   [1m[36mAppointment Load (0.1ms)[0m  [1m[34mSELECT "appointments".* FROM "appointments" WHERE "appointments"."pet_id" = $1[0m  [["pet_id", 3]]
+[active_model_serializers]   ↳ app/controllers/pets_controller.rb:29:in `show'
+[active_model_serializers] Rendered ActiveModel::Serializer::CollectionSerializer with Array (1.64ms)
+Completed 200 OK in 6ms (Views: 2.1ms | ActiveRecord: 0.5ms | Allocations: 2469)
+
+
+Started GET "/pet_show" for ::1 at 2021-12-20 06:36:24 +0200
+Processing by PetsController#show as */*
+  Parameters: {"id"=>"3", "application"=>{"id"=>"3"}}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/auth/authorize_api_request.rb:20:in `user'
+  [1m[36mPet Load (0.2ms)[0m  [1m[34mSELECT "pets".* FROM "pets" WHERE "pets"."id" = $1 LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/controllers/pets_controller.rb:23:in `show'
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/controllers/pets_controller.rb:27:in `show'
+No serializer found for resource: #<Pet id: 3, name: "zzz", user_id: 2, created_at: "2021-12-20 04:34:12.685503000 +0000", updated_at: "2021-12-20 04:34:17.060377000 +0000", vet_id: 3>
+[active_model_serializers]   [1m[36mAppointment Load (0.1ms)[0m  [1m[34mSELECT "appointments".* FROM "appointments" WHERE "appointments"."pet_id" = $1[0m  [["pet_id", 3]]
+[active_model_serializers]   ↳ app/controllers/pets_controller.rb:29:in `show'
+[active_model_serializers] Rendered ActiveModel::Serializer::CollectionSerializer with Array (1.46ms)
+Completed 200 OK in 6ms (Views: 2.0ms | ActiveRecord: 0.6ms | Allocations: 2469)
+
+
+Started GET "/pets_list" for ::1 at 2021-12-20 06:36:24 +0200
+Processing by PetsController#index as */*
+  Parameters: {"application"=>{}}
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/auth/authorize_api_request.rb:20:in `user'
+  [1m[36mPet Load (2.4ms)[0m  [1m[34mSELECT "pets".* FROM "pets" WHERE "pets"."user_id" = $1[0m  [["user_id", 2]]
+  ↳ app/controllers/pets_controller.rb:5:in `index'
+No serializer found for resource: #<Pet id: 1, name: "first pet", user_id: 2, created_at: "2021-12-20 03:45:17.934292000 +0000", updated_at: "2021-12-20 03:59:44.123236000 +0000", vet_id: 3>
+[active_model_serializers]   [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."role" = $1[0m  [["role", 1]]
+[active_model_serializers]   ↳ app/controllers/pets_controller.rb:5:in `index'
+[active_model_serializers] Rendered ActiveModel::Serializer::CollectionSerializer with Array (3.13ms)
+Completed 200 OK in 11ms (Views: 5.6ms | ActiveRecord: 2.9ms | Allocations: 2605)
+
+
+Started GET "/pets_list" for ::1 at 2021-12-20 06:36:25 +0200
+Processing by PetsController#index as */*
+  Parameters: {"application"=>{}}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/auth/authorize_api_request.rb:20:in `user'
+  [1m[36mPet Load (0.3ms)[0m  [1m[34mSELECT "pets".* FROM "pets" WHERE "pets"."user_id" = $1[0m  [["user_id", 2]]
+  ↳ app/controllers/pets_controller.rb:5:in `index'
+No serializer found for resource: #<Pet id: 1, name: "first pet", user_id: 2, created_at: "2021-12-20 03:45:17.934292000 +0000", updated_at: "2021-12-20 03:59:44.123236000 +0000", vet_id: 3>
+[active_model_serializers]   [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."role" = $1[0m  [["role", 1]]
+[active_model_serializers]   ↳ app/controllers/pets_controller.rb:5:in `index'
+[active_model_serializers] Rendered ActiveModel::Serializer::CollectionSerializer with Array (1.9ms)
+Completed 200 OK in 7ms (Views: 4.0ms | ActiveRecord: 0.6ms | Allocations: 2605)
+
+
+Started GET "/pets_list" for ::1 at 2021-12-20 06:36:25 +0200
+Processing by PetsController#index as */*
+  Parameters: {"application"=>{}}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/auth/authorize_api_request.rb:20:in `user'
+  [1m[36mPet Load (0.2ms)[0m  [1m[34mSELECT "pets".* FROM "pets" WHERE "pets"."user_id" = $1[0m  [["user_id", 2]]
+  ↳ app/controllers/pets_controller.rb:5:in `index'
+No serializer found for resource: #<Pet id: 1, name: "first pet", user_id: 2, created_at: "2021-12-20 03:45:17.934292000 +0000", updated_at: "2021-12-20 03:59:44.123236000 +0000", vet_id: 3>
+[active_model_serializers]   [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."role" = $1[0m  [["role", 1]]
+[active_model_serializers]   ↳ app/controllers/pets_controller.rb:5:in `index'
+[active_model_serializers] Rendered ActiveModel::Serializer::CollectionSerializer with Array (2.02ms)
+Completed 200 OK in 6ms (Views: 3.7ms | ActiveRecord: 0.5ms | Allocations: 2605)
+
+
+Started GET "/pet_show" for ::1 at 2021-12-20 06:36:26 +0200
+Processing by PetsController#show as */*
+  Parameters: {"id"=>"3", "application"=>{"id"=>"3"}}
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/auth/authorize_api_request.rb:20:in `user'
+  [1m[36mPet Load (0.2ms)[0m  [1m[34mSELECT "pets".* FROM "pets" WHERE "pets"."id" = $1 LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/controllers/pets_controller.rb:23:in `show'
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/controllers/pets_controller.rb:27:in `show'
+No serializer found for resource: #<Pet id: 3, name: "zzz", user_id: 2, created_at: "2021-12-20 04:34:12.685503000 +0000", updated_at: "2021-12-20 04:34:17.060377000 +0000", vet_id: 3>
+[active_model_serializers]   [1m[36mAppointment Load (10.5ms)[0m  [1m[34mSELECT "appointments".* FROM "appointments" WHERE "appointments"."pet_id" = $1[0m  [["pet_id", 3]]
+[active_model_serializers]   ↳ app/controllers/pets_controller.rb:29:in `show'
+[active_model_serializers] Rendered ActiveModel::Serializer::CollectionSerializer with Array (13.5ms)
+Completed 200 OK in 20ms (Views: 4.1ms | ActiveRecord: 11.4ms | Allocations: 2469)
+
+
+Started GET "/pet_show" for ::1 at 2021-12-20 06:36:27 +0200
+Processing by PetsController#show as */*
+  Parameters: {"id"=>"3", "application"=>{"id"=>"3"}}
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/auth/authorize_api_request.rb:20:in `user'
+  [1m[36mPet Load (0.1ms)[0m  [1m[34mSELECT "pets".* FROM "pets" WHERE "pets"."id" = $1 LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/controllers/pets_controller.rb:23:in `show'
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/controllers/pets_controller.rb:27:in `show'
+No serializer found for resource: #<Pet id: 3, name: "zzz", user_id: 2, created_at: "2021-12-20 04:34:12.685503000 +0000", updated_at: "2021-12-20 04:34:17.060377000 +0000", vet_id: 3>
+[active_model_serializers]   [1m[36mAppointment Load (0.1ms)[0m  [1m[34mSELECT "appointments".* FROM "appointments" WHERE "appointments"."pet_id" = $1[0m  [["pet_id", 3]]
+[active_model_serializers]   ↳ app/controllers/pets_controller.rb:29:in `show'
+[active_model_serializers] Rendered ActiveModel::Serializer::CollectionSerializer with Array (1.81ms)
+Completed 200 OK in 6ms (Views: 2.3ms | ActiveRecord: 0.5ms | Allocations: 2469)
+
+
+Started GET "/pet_show" for ::1 at 2021-12-20 06:36:28 +0200
+Processing by PetsController#show as */*
+  Parameters: {"id"=>"3", "application"=>{"id"=>"3"}}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/auth/authorize_api_request.rb:20:in `user'
+  [1m[36mPet Load (0.2ms)[0m  [1m[34mSELECT "pets".* FROM "pets" WHERE "pets"."id" = $1 LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/controllers/pets_controller.rb:23:in `show'
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/controllers/pets_controller.rb:27:in `show'
+No serializer found for resource: #<Pet id: 3, name: "zzz", user_id: 2, created_at: "2021-12-20 04:34:12.685503000 +0000", updated_at: "2021-12-20 04:34:17.060377000 +0000", vet_id: 3>
+[active_model_serializers]   [1m[36mAppointment Load (0.1ms)[0m  [1m[34mSELECT "appointments".* FROM "appointments" WHERE "appointments"."pet_id" = $1[0m  [["pet_id", 3]]
+[active_model_serializers]   ↳ app/controllers/pets_controller.rb:29:in `show'
+[active_model_serializers] Rendered ActiveModel::Serializer::CollectionSerializer with Array (1.4ms)
+Completed 200 OK in 6ms (Views: 1.9ms | ActiveRecord: 0.6ms | Allocations: 2469)
+
+
+Started GET "/pets_list" for ::1 at 2021-12-20 06:36:28 +0200
+Processing by PetsController#index as */*
+  Parameters: {"application"=>{}}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/auth/authorize_api_request.rb:20:in `user'
+  [1m[36mPet Load (0.5ms)[0m  [1m[34mSELECT "pets".* FROM "pets" WHERE "pets"."user_id" = $1[0m  [["user_id", 2]]
+  ↳ app/controllers/pets_controller.rb:5:in `index'
+No serializer found for resource: #<Pet id: 1, name: "first pet", user_id: 2, created_at: "2021-12-20 03:45:17.934292000 +0000", updated_at: "2021-12-20 03:59:44.123236000 +0000", vet_id: 3>
+[active_model_serializers]   [1m[36mUser Load (2.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."role" = $1[0m  [["role", 1]]
+[active_model_serializers]   ↳ app/controllers/pets_controller.rb:5:in `index'
+[active_model_serializers] Rendered ActiveModel::Serializer::CollectionSerializer with Array (5.09ms)
+Completed 200 OK in 13ms (Views: 7.6ms | ActiveRecord: 2.6ms | Allocations: 2605)
+
+
+Started GET "/pets_list" for ::1 at 2021-12-20 06:37:31 +0200
+Processing by PetsController#index as */*
+  Parameters: {"application"=>{}}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/auth/authorize_api_request.rb:20:in `user'
+  [1m[36mPet Load (0.2ms)[0m  [1m[34mSELECT "pets".* FROM "pets" WHERE "pets"."user_id" = $1[0m  [["user_id", 2]]
+  ↳ app/controllers/pets_controller.rb:5:in `index'
+No serializer found for resource: #<Pet id: 1, name: "first pet", user_id: 2, created_at: "2021-12-20 03:45:17.934292000 +0000", updated_at: "2021-12-20 03:59:44.123236000 +0000", vet_id: 3>
+[active_model_serializers]   [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."role" = $1[0m  [["role", 1]]
+[active_model_serializers]   ↳ app/controllers/pets_controller.rb:5:in `index'
+[active_model_serializers] Rendered ActiveModel::Serializer::CollectionSerializer with Array (2.24ms)
+Completed 200 OK in 6ms (Views: 4.0ms | ActiveRecord: 0.6ms | Allocations: 2605)
+
+
+Started POST "/appointment_create" for ::1 at 2021-12-20 06:37:40 +0200
+Processing by AppointmentsController#create as */*
+  Parameters: {"pet_id"=>"3", "vet_id"=>"3", "date"=>"2021-12-08", "application"=>{"pet_id"=>"3", "vet_id"=>"3", "date"=>"2021-12-08"}}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/auth/authorize_api_request.rb:20:in `user'
+Completed 400 Bad Request in 2ms (ActiveRecord: 0.2ms | Allocations: 670)
+
+
+  
+ActionController::ParameterMissing (param is missing or the value is empty: appointment
+Did you mean?  application
+               action
+               controller
+               date):
+  
+app/controllers/appointments_controller.rb:12:in `appointment_params'
+app/controllers/appointments_controller.rb:3:in `create'
+Started GET "/pets_list" for ::1 at 2021-12-20 06:39:36 +0200
+Processing by PetsController#index as */*
+  Parameters: {"pet"=>{}}
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/auth/authorize_api_request.rb:20:in `user'
+  [1m[36mPet Load (0.3ms)[0m  [1m[34mSELECT "pets".* FROM "pets" WHERE "pets"."user_id" = $1[0m  [["user_id", 2]]
+  ↳ app/controllers/pets_controller.rb:5:in `index'
+No serializer found for resource: #<Pet id: 1, name: "first pet", user_id: 2, created_at: "2021-12-20 03:45:17.934292000 +0000", updated_at: "2021-12-20 03:59:44.123236000 +0000", vet_id: 3>
+[active_model_serializers]   [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."role" = $1[0m  [["role", 1]]
+[active_model_serializers]   ↳ app/controllers/pets_controller.rb:5:in `index'
+[active_model_serializers] Rendered ActiveModel::Serializer::CollectionSerializer with Array (1.89ms)
+Completed 200 OK in 27ms (Views: 12.6ms | ActiveRecord: 6.3ms | Allocations: 9953)
+
+
+Started GET "/pets_list" for ::1 at 2021-12-20 06:39:38 +0200
+Processing by PetsController#index as */*
+  Parameters: {"pet"=>{}}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/auth/authorize_api_request.rb:20:in `user'
+  [1m[36mPet Load (0.2ms)[0m  [1m[34mSELECT "pets".* FROM "pets" WHERE "pets"."user_id" = $1[0m  [["user_id", 2]]
+  ↳ app/controllers/pets_controller.rb:5:in `index'
+No serializer found for resource: #<Pet id: 1, name: "first pet", user_id: 2, created_at: "2021-12-20 03:45:17.934292000 +0000", updated_at: "2021-12-20 03:59:44.123236000 +0000", vet_id: 3>
+[active_model_serializers]   [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."role" = $1[0m  [["role", 1]]
+[active_model_serializers]   ↳ app/controllers/pets_controller.rb:5:in `index'
+[active_model_serializers] Rendered ActiveModel::Serializer::CollectionSerializer with Array (1.94ms)
+Completed 200 OK in 6ms (Views: 3.4ms | ActiveRecord: 0.4ms | Allocations: 2605)
+
+
+Started GET "/pet_show" for ::1 at 2021-12-20 06:39:39 +0200
+Processing by PetsController#show as */*
+  Parameters: {"id"=>"3", "pet"=>{"id"=>"3"}}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/auth/authorize_api_request.rb:20:in `user'
+  [1m[36mPet Load (0.2ms)[0m  [1m[34mSELECT "pets".* FROM "pets" WHERE "pets"."id" = $1 LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/controllers/pets_controller.rb:23:in `show'
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/controllers/pets_controller.rb:27:in `show'
+No serializer found for resource: #<Pet id: 3, name: "zzz", user_id: 2, created_at: "2021-12-20 04:34:12.685503000 +0000", updated_at: "2021-12-20 04:34:17.060377000 +0000", vet_id: 3>
+[active_model_serializers]   [1m[36mAppointment Load (0.3ms)[0m  [1m[34mSELECT "appointments".* FROM "appointments" WHERE "appointments"."pet_id" = $1[0m  [["pet_id", 3]]
+[active_model_serializers]   ↳ app/controllers/pets_controller.rb:29:in `show'
+[active_model_serializers] Rendered ActiveModel::Serializer::CollectionSerializer with Array (1.96ms)
+Completed 200 OK in 26ms (Views: 2.3ms | ActiveRecord: 12.5ms | Allocations: 3936)
+
+
+Started POST "/appointment_create" for ::1 at 2021-12-20 06:39:50 +0200
+Processing by AppointmentsController#create as */*
+  Parameters: {"pet_id"=>"3", "vet_id"=>"3", "date"=>"2021-12-24", "appointment"=>{"pet_id"=>"3", "vet_id"=>"3", "date"=>"2021-12-24"}}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/auth/authorize_api_request.rb:20:in `user'
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/appointments_controller.rb:3:in `create'
+  [1m[36mAppointment Create (0.3ms)[0m  [1m[32mINSERT INTO "appointments" ("pet_id", "vet_id", "date", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["pet_id", 3], ["vet_id", 3], ["date", "2021-12-24 00:00:00"], ["created_at", "2021-12-20 04:39:50.330217"], ["updated_at", "2021-12-20 04:39:50.330217"]]
+  ↳ app/controllers/appointments_controller.rb:3:in `create'
+  [1m[36mTRANSACTION (0.7ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/controllers/appointments_controller.rb:3:in `create'
+Completed 201 Created in 11ms (Views: 0.1ms | ActiveRecord: 2.8ms | Allocations: 4714)
+
+
+Started GET "/pet_show" for ::1 at 2021-12-20 06:40:00 +0200
+Processing by PetsController#show as */*
+  Parameters: {"id"=>"3", "pet"=>{"id"=>"3"}}
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/auth/authorize_api_request.rb:20:in `user'
+  [1m[36mPet Load (1.2ms)[0m  [1m[34mSELECT "pets".* FROM "pets" WHERE "pets"."id" = $1 LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/controllers/pets_controller.rb:23:in `show'
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/controllers/pets_controller.rb:27:in `show'
+No serializer found for resource: #<Pet id: 3, name: "zzz", user_id: 2, created_at: "2021-12-20 04:34:12.685503000 +0000", updated_at: "2021-12-20 04:34:17.060377000 +0000", vet_id: 3>
+[active_model_serializers]   [1m[36mAppointment Load (0.7ms)[0m  [1m[34mSELECT "appointments".* FROM "appointments" WHERE "appointments"."pet_id" = $1[0m  [["pet_id", 3]]
+[active_model_serializers]   ↳ app/controllers/pets_controller.rb:29:in `show'
+[active_model_serializers] Rendered ActiveModel::Serializer::CollectionSerializer with Array (3.83ms)
+Completed 200 OK in 13ms (Views: 4.4ms | ActiveRecord: 2.6ms | Allocations: 2599)
+
+
+Started GET "/pets_list" for ::1 at 2021-12-20 06:40:03 +0200
+Processing by PetsController#index as */*
+  Parameters: {"pet"=>{}}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/auth/authorize_api_request.rb:20:in `user'
+  [1m[36mPet Load (0.2ms)[0m  [1m[34mSELECT "pets".* FROM "pets" WHERE "pets"."user_id" = $1[0m  [["user_id", 2]]
+  ↳ app/controllers/pets_controller.rb:5:in `index'
+No serializer found for resource: #<Pet id: 1, name: "first pet", user_id: 2, created_at: "2021-12-20 03:45:17.934292000 +0000", updated_at: "2021-12-20 03:59:44.123236000 +0000", vet_id: 3>
+[active_model_serializers]   [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."role" = $1[0m  [["role", 1]]
+[active_model_serializers]   ↳ app/controllers/pets_controller.rb:5:in `index'
+[active_model_serializers] Rendered ActiveModel::Serializer::CollectionSerializer with Array (1.79ms)
+Completed 200 OK in 6ms (Views: 3.7ms | ActiveRecord: 0.5ms | Allocations: 2605)
+
+
+Started GET "/pet_show" for ::1 at 2021-12-20 06:40:06 +0200
+Processing by PetsController#show as */*
+  Parameters: {"id"=>"3", "pet"=>{"id"=>"3"}}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/auth/authorize_api_request.rb:20:in `user'
+  [1m[36mPet Load (0.1ms)[0m  [1m[34mSELECT "pets".* FROM "pets" WHERE "pets"."id" = $1 LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/controllers/pets_controller.rb:23:in `show'
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/controllers/pets_controller.rb:27:in `show'
+No serializer found for resource: #<Pet id: 3, name: "zzz", user_id: 2, created_at: "2021-12-20 04:34:12.685503000 +0000", updated_at: "2021-12-20 04:34:17.060377000 +0000", vet_id: 3>
+[active_model_serializers]   [1m[36mAppointment Load (2.3ms)[0m  [1m[34mSELECT "appointments".* FROM "appointments" WHERE "appointments"."pet_id" = $1[0m  [["pet_id", 3]]
+[active_model_serializers]   ↳ app/controllers/pets_controller.rb:29:in `show'
+[active_model_serializers] Rendered ActiveModel::Serializer::CollectionSerializer with Array (4.95ms)
+Completed 200 OK in 10ms (Views: 3.6ms | ActiveRecord: 2.8ms | Allocations: 2570)
+
+
+Started POST "/appointment_create" for ::1 at 2021-12-20 06:41:30 +0200
+Processing by AppointmentsController#create as */*
+  Parameters: {"pet_id"=>"3", "vet_id"=>"3", "date"=>"2021-12-23", "appointment"=>{"pet_id"=>"3", "vet_id"=>"3", "date"=>"2021-12-23"}}
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/auth/authorize_api_request.rb:20:in `user'
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/appointments_controller.rb:4:in `create'
+  [1m[36mAppointment Create (0.3ms)[0m  [1m[32mINSERT INTO "appointments" ("pet_id", "vet_id", "date", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["pet_id", 3], ["vet_id", 3], ["date", "2021-12-23 00:00:00"], ["created_at", "2021-12-20 04:42:54.317999"], ["updated_at", "2021-12-20 04:42:54.317999"]]
+  ↳ app/controllers/appointments_controller.rb:4:in `create'
+  [1m[36mTRANSACTION (0.8ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/controllers/appointments_controller.rb:4:in `create'
+Completed 201 Created in 84110ms (Views: 0.1ms | ActiveRecord: 7.1ms | Allocations: 143335)
+
+
+Started GET "/pets_list" for ::1 at 2021-12-20 06:42:58 +0200
+Processing by PetsController#index as */*
+  Parameters: {"pet"=>{}}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/auth/authorize_api_request.rb:20:in `user'
+  [1m[36mPet Load (0.2ms)[0m  [1m[34mSELECT "pets".* FROM "pets" WHERE "pets"."user_id" = $1[0m  [["user_id", 2]]
+  ↳ app/controllers/pets_controller.rb:5:in `index'
+No serializer found for resource: #<Pet id: 1, name: "first pet", user_id: 2, created_at: "2021-12-20 03:45:17.934292000 +0000", updated_at: "2021-12-20 03:59:44.123236000 +0000", vet_id: 3>
+[active_model_serializers]   [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."role" = $1[0m  [["role", 1]]
+[active_model_serializers]   ↳ app/controllers/pets_controller.rb:5:in `index'
+[active_model_serializers] Rendered ActiveModel::Serializer::CollectionSerializer with Array (2.76ms)
+Completed 200 OK in 14ms (Views: 9.2ms | ActiveRecord: 4.3ms | Allocations: 5348)
+
+
+Started GET "/pet_show" for ::1 at 2021-12-20 06:42:59 +0200
+Processing by PetsController#show as */*
+  Parameters: {"id"=>"3", "pet"=>{"id"=>"3"}}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/auth/authorize_api_request.rb:20:in `user'
+  [1m[36mPet Load (0.3ms)[0m  [1m[34mSELECT "pets".* FROM "pets" WHERE "pets"."id" = $1 LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/controllers/pets_controller.rb:23:in `show'
+  [1m[36mUser Load (2.4ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/controllers/pets_controller.rb:27:in `show'
+No serializer found for resource: #<Pet id: 3, name: "zzz", user_id: 2, created_at: "2021-12-20 04:34:12.685503000 +0000", updated_at: "2021-12-20 04:34:17.060377000 +0000", vet_id: 3>
+[active_model_serializers]   [1m[36mAppointment Load (0.3ms)[0m  [1m[34mSELECT "appointments".* FROM "appointments" WHERE "appointments"."pet_id" = $1[0m  [["pet_id", 3]]
+[active_model_serializers]   ↳ app/controllers/pets_controller.rb:29:in `show'
+[active_model_serializers] Rendered ActiveModel::Serializer::CollectionSerializer with Array (3.32ms)
+Completed 200 OK in 14ms (Views: 4.0ms | ActiveRecord: 3.2ms | Allocations: 2891)
+
+
+Started POST "/vet_pets" for ::1 at 2021-12-20 06:43:05 +0200
+Processing by UsersController#vet_pets as */*
+  Parameters: {"user"=>{}}
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/auth/authorize_api_request.rb:20:in `user'
+  [1m[36mPet Load (0.3ms)[0m  [1m[34mSELECT "pets".* FROM "pets" WHERE "pets"."vet_id" = $1[0m  [["vet_id", 3]]
+  ↳ app/controllers/users_controller.rb:12:in `vet_pets'
+No serializer found for resource: #<Pet id: 1, name: "first pet", user_id: 2, created_at: "2021-12-20 03:45:17.934292000 +0000", updated_at: "2021-12-20 03:59:44.123236000 +0000", vet_id: 3>
+[active_model_serializers] Rendered ActiveModel::Serializer::CollectionSerializer with Pet::ActiveRecord_Relation (0.38ms)
+Completed 200 OK in 5ms (Views: 2.4ms | ActiveRecord: 0.5ms | Allocations: 1744)
+
+
+Started POST "/vet_pets" for ::1 at 2021-12-20 06:43:07 +0200
+Processing by UsersController#vet_pets as */*
+  Parameters: {"user"=>{}}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/auth/authorize_api_request.rb:20:in `user'
+  [1m[36mPet Load (0.2ms)[0m  [1m[34mSELECT "pets".* FROM "pets" WHERE "pets"."vet_id" = $1[0m  [["vet_id", 3]]
+  ↳ app/controllers/users_controller.rb:12:in `vet_pets'
+No serializer found for resource: #<Pet id: 1, name: "first pet", user_id: 2, created_at: "2021-12-20 03:45:17.934292000 +0000", updated_at: "2021-12-20 03:59:44.123236000 +0000", vet_id: 3>
+[active_model_serializers] Rendered ActiveModel::Serializer::CollectionSerializer with Pet::ActiveRecord_Relation (0.41ms)
+Completed 200 OK in 5ms (Views: 2.4ms | ActiveRecord: 0.4ms | Allocations: 1696)
+
+
+Started POST "/vet_pet_appointment" for ::1 at 2021-12-20 06:43:08 +0200
+Processing by UsersController#vet_pet_appointment as */*
+  Parameters: {"pet_id"=>"3", "user"=>{}}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/auth/authorize_api_request.rb:20:in `user'
+  [1m[36mPet Load (0.2ms)[0m  [1m[34mSELECT "pets".* FROM "pets" WHERE "pets"."id" = $1 LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:21:in `vet_pet_appointment'
+No serializer found for resource: #<Pet id: 3, name: "zzz", user_id: 2, created_at: "2021-12-20 04:34:12.685503000 +0000", updated_at: "2021-12-20 04:34:17.060377000 +0000", vet_id: 3>
+[active_model_serializers]   [1m[36mAppointment Load (0.1ms)[0m  [1m[34mSELECT "appointments".* FROM "appointments" WHERE "appointments"."pet_id" = $1[0m  [["pet_id", 3]]
+[active_model_serializers]   ↳ app/controllers/users_controller.rb:23:in `vet_pet_appointment'
+[active_model_serializers] Rendered ActiveModel::Serializer::CollectionSerializer with Array (1.61ms)
+Completed 200 OK in 6ms (Views: 2.1ms | ActiveRecord: 0.5ms | Allocations: 2214)
+
+

@@ -22,6 +22,11 @@ class UsersController < ApplicationController
       @appointments = Appointment.where(pet_id: params[:pet_id])
       render json: [@pet, @appointments]
     end
+
+    def vet_registration
+      render json: "success", status: 200
+    end
+
     private
 
     def user_params

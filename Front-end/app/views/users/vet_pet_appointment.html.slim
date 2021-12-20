@@ -3,3 +3,8 @@ br
 - @appointments.each do |appointment|
     = appointment["date"]
     br
+= form_with url: "http://localhost:3000/vet_registration", method: :post do |form|
+    = form.hidden_field(:pet_id, :value => @pet["id"])
+    = form.hidden_field(:vet_id, :value => @pet["vet_id"])
+    br
+    = form.submit :register

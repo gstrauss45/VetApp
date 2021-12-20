@@ -1,5 +1,6 @@
 class AppointmentsController < ApplicationController
     def create
+        binding.pry
         if Appointment.create(appointment_params)
             render status: 201
         else

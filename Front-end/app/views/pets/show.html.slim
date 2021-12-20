@@ -2,8 +2,9 @@
 br
 = @vet["name"]
 br
-|appointments
-br
-- @appointments.each do |appointment|
-    = appointment["date"]
+- if @appointments.any?
+    |appointments:
     br
+    - @appointments.each do |appointment|
+        = appointment["date"]
+        br
